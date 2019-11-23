@@ -1,7 +1,7 @@
 from .base import *  # noqa
 
 
-SECRET_KEY = 'test'
+SECRET_KEY = config('SECRET_KEY_TEST')
 
 DATABASES = {
     'default': {

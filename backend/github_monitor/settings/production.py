@@ -9,7 +9,7 @@ from .base import *  # noqa
 
 DEBUG = False
 
-SECRET_KEY = config('SECRET_KEY_PRODUCTION')
+SECRET_KEY = config('SECRET_KEY')
 
 DATABASES = {
     'default': config('DATABASE_URL', cast=db_url),
