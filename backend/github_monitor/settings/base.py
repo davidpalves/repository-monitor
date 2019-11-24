@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'webpack_loader',
     'import_export',
     'social_django',
-    'rest_framework'
+    'rest_framework',
 
     'common',
     'users',
