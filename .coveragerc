@@ -4,3 +4,8 @@ omit = */virtualenvs/*
        */migrations/*
        */settings/*
        */tests/*
+       */manage.py
+       */managers.py
+       */github_monitor/celery.py
+       */github_monitor/wsgi.py
+       */github_monitor/urls.py
