@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'webpack_loader',
     'import_export',
     'social_django',
+    'rest_framework'
 
     'common',
     'users',
@@ -154,3 +155,14 @@ SOCIAL_AUTH_GITHUB_SCOPE = [
 
 SOCIAL_AUTH_GITHUB_KEY = config('SOCIAL_AUTH_GITHUB_KEY')
 SOCIAL_AUTH_GITHUB_SECRET = config('SOCIAL_AUTH_GITHUB_SECRET')
+
+# Django REST Framework
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated'
+    ]
+}
