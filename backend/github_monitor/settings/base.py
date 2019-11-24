@@ -18,7 +18,7 @@ SECURE_HSTS_PRELOAD = True
 DEBUG = True
 
 ADMINS = (
-    ('Admin', 'davidpierrealves21@gmail.com'),
+    ('David Pierre', 'davidpierrealves21@gmail.com'),
 )
 
 AUTH_USER_MODEL = 'users.User'
@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django_js_reverse',
     'webpack_loader',
     'import_export',
+    'social_django',
 
     'common',
     'users',
@@ -50,6 +51,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    'social_django.middleware.SocialAuthExceptionMiddleware',
+
 ]
 
 ROOT_URLCONF = 'github_monitor.urls'
@@ -67,12 +71,20 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'common.context_processors.sentry_dsn',
                 'common.context_processors.commit_sha',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ],
         },
     },
 ]
 
 WSGI_APPLICATION = 'github_monitor.wsgi.application'
+
+AUTHENTICATION_BACKENDS = (
+    'social_core.backends.github.GithubOAuth2',
+
+    'django.contrib.auth.backends.ModelBackend',
+)
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -126,3 +138,19 @@ CELERY_ACKS_LATE = True
 # Sentry
 SENTRY_DSN = config('SENTRY_DSN', default='')
 COMMIT_SHA = config('HEROKU_SLUG_COMMIT', default='')
+
+
+# Social Auth
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = 'home'
+LOGOUT_REDIRECT_URL = 'home'
+
+SOCIAL_AUTH_STORAGE = 'users.storage.GithubSocialStorage'
+
+SOCIAL_AUTH_GITHUB_SCOPE = [
+    'user:email', 'read:user', 'repo', 'user', 'read:org'
+]
+
+SOCIAL_AUTH_GITHUB_KEY = config('SOCIAL_AUTH_GITHUB_KEY')
+SOCIAL_AUTH_GITHUB_SECRET = config('SOCIAL_AUTH_GITHUB_SECRET')
