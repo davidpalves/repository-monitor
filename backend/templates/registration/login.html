@@ -1,6 +1,74 @@
 {% extends 'base.html' %}
-          {% load static %}
+{% load static %}
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+{% block title %}Mogitor - Login {% endblock %}
 
 {% block body %}
-  <a href="{% url 'social:begin' 'github' %}">Login with GitHub</a><br>
-{% endblock %}
+
+<div class="wrapper">
+  <div class="overlay">
+    <div class="header">
+      <span class="header-message"><p>Welcome to</p></span>
+      <span class="header-brand"><p>Mo<strong><i>git</i></strong>or!</p></span>
+    </div>
+    <a class="btn btn-dark github-btn" href="{% url 'social:begin' 'github' %}"><img src={% static 'images/github-icon.png' %}/> Login with GitHub</a><br/>
+    <small>Your github repositories monitor!</small>
+  </div>
+</div>
+
+<style>
+
+  body {
+    background-image: url('/static/images/hypnotize.png');
+  }
+  .wrapper {
+    text-align: center;
+    vertical-align: center;
+  }
+
+  .overlay{
+    background-color: rgba(255, 255, 255, 0.75);
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+    padding-top: 10px;
+    padding-bottom: 10%;
+    border-radius: 5px;
+  }
+  .github-btn {
+    padding: 15px 25px;
+    align-items: center;
+    font-weight: bold;
+    margin-bottom: 5%;
+  }
+
+  img {
+    width: 10%;
+    margin-bottom: 5px;
+    margin-right: 3%;
+  }
+
+  small {
+    font-size: 18px;
+  }
+
+  .header {
+    margin-top: 10%;
+    display: block;
+    margin-bottom: 5%;
+  }
+
+  .header-message {
+    font-size: 2em;
+  }
+  .header-brand {
+    font-size: 5em;
+    margin-bottom: 0;
+  }
+
+</style>
+
+  {% endblock %}
