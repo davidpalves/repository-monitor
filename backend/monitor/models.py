@@ -9,7 +9,10 @@ class Repository(IndexedTimeStampedModel):
         related_name='repositories',
         on_delete=models.CASCADE
     )
-
+    users = models.ManyToManyField(
+        'users.User',
+        related_name='watched_repositories'
+    )
     name = models.CharField(max_length=255)
     description = models.CharField(max_length=255)
 
