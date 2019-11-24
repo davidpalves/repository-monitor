@@ -29,11 +29,11 @@ class User(AbstractBaseUser, PermissionsMixin, IndexedTimeStampedModel):
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']
 
-    def get_full_name(self):
+    def get_email(self):
         return self.email
 
-    def get_short_name(self):
-        return self.email
+    def get_username(self):
+        return self.username
 
     def __str__(self):
         return self.email
