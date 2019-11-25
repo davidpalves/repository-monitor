@@ -11,7 +11,7 @@ from django.contrib.auth.decorators import login_required
 @login_required
 def home(request):
     context = {
-        # 'avatar': request.user.github_avatar_url,
+        'name': request.user.name,
         'login': request.user.username,
     }
     return render(request, 'monitor/index.html', context)
