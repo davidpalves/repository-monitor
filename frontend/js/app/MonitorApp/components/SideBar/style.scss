@@ -1,0 +1,27 @@
+.sidebar {
+  height: calc(100vh - 64px);
+  width: 20%;
+  display: flex;
+  border-right: 1px solid rgba(0, 0, 0, 0.2);
+  align-items: center;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.7);
+
+  label {
+    font-size: 20px;
+    text-align: center;
+  }
+
+  input {
+    text-align: left;
+    width: 80%;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+
+    &:focus {
+      outline: none;
+      border-bottom: 1px solid rgba(50, 50, 50, 0.8);
+    }
+  }
+
+}

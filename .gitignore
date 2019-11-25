@@ -47,3 +47,4 @@ spritesmith.scss
 
 # templated email
 tmp_email/
+backend/db.sqlite3

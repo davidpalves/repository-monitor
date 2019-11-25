@@ -1,10 +1,10 @@
 
 .top-navbar {
-    background-color: #333;
+    background-color: #292b2c;
     display: flex;
     flex-flow: row nowrap;
     width: 100%;
-    
+
     ul {
         list-style-type: none;
         margin: 0;
@@ -20,22 +20,37 @@
     }
   }
 
-  .brand {
-      font-size: 1.5em;
-  }
-  
-  li {
-    float: left;
-  
-    span {
-        display: block;
-        color: white;
-        text-align: center;
-        padding: 14px 16px;
-        text-decoration: none;
 
-        a  {
-            color: #f1f1f1;
-        }
+  .brand {
+    font-size: 1.5em;
+
+    a:hover {
+      text-decoration: none;
     }
   }
+
+  li {
+    float: left;
+
+    span {
+      display: block;
+      color: white;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+
+      a  {
+          color: #f1f1f1;
+          text-decoration: none;
+          &:hover {
+            color: #fff;
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+
+
+a {
+  text-decoration: none;
+}
