@@ -11,6 +11,8 @@ certifi==2019.9.11        # via requests
 cfgv==2.0.1               # via pre-commit
 chardet==3.0.4            # via requests
 click==7.0                # via safety
+coreapi==2.3.3
+coreschema==0.0.4         # via coreapi
 coverage==4.5.4
 django-naomi==0.8
 django==2.2.7             # via django-naomi, model-mommy
@@ -21,8 +23,12 @@ gitpython==3.0.5          # via bandit
 identify==1.4.7           # via pre-commit
 idna==2.8                 # via requests
 importlib-metadata==0.23  # via pre-commit
+importlib-resources==1.0.2  # via pre-commit
 isort==4.3.21
+itypes==1.1.0             # via coreapi
+jinja2==2.10.3            # via coreschema
 lazy-object-proxy==1.4.3  # via astroid
+markupsafe==1.1.1         # via jinja2
 mccabe==0.6.1             # via prospector, pylint
 model-mommy==2.0.0
 more-itertools==7.2.0     # via zipp
@@ -43,7 +49,7 @@ pylint==2.3.1             # via prospector, pylint-celery, pylint-django, pylint
 pyparsing==2.4.5          # via packaging
 pytz==2019.3              # via django
 pyyaml==5.1.2             # via aspy.yaml, bandit, dparse, pre-commit, prospector
-requests==2.22.0          # via safety
+requests==2.22.0          # via coreapi, safety
 requirements-detector==0.6  # via prospector
 safety==1.8.5
 setoptconf==0.2.0         # via prospector
@@ -54,10 +60,11 @@ sqlparse==0.3.0           # via django
 stevedore==1.31.0         # via bandit
 toml==0.10.0              # via pre-commit
 typed-ast==1.4.0          # via astroid
+uritemplate==3.0.0        # via coreapi
 urllib3==1.25.7           # via requests
 virtualenv==16.7.8        # via pre-commit
 wrapt==1.11.2             # via astroid
 zipp==0.6.0               # via importlib-metadata
 
 # The following packages are considered to be unsafe in a requirements file:
-# setuptools==41.6.0        # via safety
+# setuptools==42.0.1        # via safety
