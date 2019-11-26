@@ -10,6 +10,8 @@ urlpatterns = [
 
 router = DefaultRouter()
 router.register('repositories', views.RepositoryViewSet, base_name='repositories')
+router.register('commits', views.CommitViewSet, base_name='commits')
+router.register('authors', views.AuthorViewSet, base_name='authors')
 
 urlpatterns = [
     path('api/v1/', include(router.urls)),
