@@ -16,4 +16,5 @@ ipython
 sentry-sdk
 social-auth-app-django
 djangorestframework
+coreapi
 PyGithub
