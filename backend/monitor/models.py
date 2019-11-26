@@ -14,6 +14,7 @@ class Repository(IndexedTimeStampedModel):
         related_name='watched_repositories'
     )
     name = models.CharField(max_length=255)
+    owner_username = models.CharField(max_length=255)
     description = models.CharField(max_length=255)
 
     def __str__(self):
