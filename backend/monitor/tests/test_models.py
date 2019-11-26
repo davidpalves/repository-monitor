@@ -12,14 +12,14 @@ class TestRepository(TestCase):
     def test_str(self):
         self.assertEqual(
             str(self.repository),
-            f'{self.repository.owner}/{self.repository.name}'
+            f'{self.repository.owner.username}/{self.repository.name}'
         )
 
     def test_str_without_name(self):
         self.repository.name = None
         self.assertEqual(
             str(self.repository),
-            f'{self.repository.owner}/None'
+            f'{self.repository.owner.username}/None'
         )
 
     def test_str_without_owner(self):
@@ -38,7 +38,7 @@ class TestRepository(TestCase):
         self.repository.name = ''
         self.assertEqual(
             str(self.repository),
-            f'{self.repository.owner}/'
+            f'{self.repository.owner.username}/'
         )
 
     def tearDown(self):

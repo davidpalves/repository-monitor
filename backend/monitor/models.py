@@ -18,7 +18,7 @@ class Repository(IndexedTimeStampedModel):
     description = models.CharField(max_length=255)
 
     def __str__(self):
-        return f'{self.owner}/{self.name}'
+        return f'{self.owner.username}/{self.name}'
 
     class Meta:
         verbose_name = 'Repository'
