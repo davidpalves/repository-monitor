@@ -5,18 +5,19 @@ from .models import Repository, Commit, Author
 class RepositorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Repository
-        fields = ('id', 'owner_username', 'name', 'description')
+        fields = ('id', 'full_name')
 
 
 class AuthorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Author
-        fields = ('id', 'username', 'email', 'avatar_url')
+        fields = ('id', 'name', 'email',)
 
 
 class CommitSerializer(serializers.ModelSerializer):
     repository = RepositorySerializer(read_only=True)
+    author = AuthorSerializer(read_only=True)
 
     class Meta:
         model = Commit
-        fields = ('id', 'sha', 'message', 'repository')
+        fields = ('id', 'sha', 'author', 'message', 'repository')

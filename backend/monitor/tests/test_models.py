@@ -7,38 +7,22 @@ from users.models import User
 
 class TestRepository(TestCase):
     def setUp(self):
-        self.repository = mommy.make('monitor.Repository')
+        self.repository = mommy.make(
+            'monitor.Repository',
+            full_name='davidpierre21/repository-monitor'
+        )
 
     def test_str(self):
         self.assertEqual(
             str(self.repository),
-            f'{self.repository.owner.username}/{self.repository.name}'
+            self.repository.full_name
         )
 
-    def test_str_without_name(self):
-        self.repository.name = None
+    def test_str_empty_string_full_name(self):
+        self.repository.full_name = ''
         self.assertEqual(
             str(self.repository),
-            f'{self.repository.owner.username}/None'
-        )
-
-    def test_str_without_owner(self):
-        self.repository.owner = None
-        with self.assertRaises(User.DoesNotExist):
-            str(self.repository)
-
-    def test_str_without_owner_and_name(self):
-        self.repository.owner = None
-        self.repository.name = None
-
-        with self.assertRaises(User.DoesNotExist):
-            str(self.repository)
-
-    def test_str_empty_string_name(self):
-        self.repository.name = ''
-        self.assertEqual(
-            str(self.repository),
-            f'{self.repository.owner.username}/'
+            ''
         )
 
     def tearDown(self):

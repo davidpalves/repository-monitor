@@ -2,8 +2,10 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from rest_framework import viewsets
 from rest_framework.response import Response
-from monitor.serializers import RepositorySerializer, CommitSerializer, AuthorSerializer
-from monitor.models import Repository, Commit, Author
+
+from .serializers import RepositorySerializer, CommitSerializer, AuthorSerializer
+from .models import Repository, Commit, Author
+from .services import create_repository
 
 
 @login_required
@@ -20,10 +22,18 @@ class RepositoryViewSet(viewsets.ModelViewSet):
     serializer_class = RepositorySerializer
 
     def list(self, request):
-        queryset = request.user.repositories.all()
+        queryset = request.user.watched_repositories.all()
         serializer = RepositorySerializer(queryset, many=True)
         return Response(serializer.data)
 
+    def create(self, request):
+        repository = create_repository(
+            full_repository_name=request.data['full_name'],
+            user=request.user
+        )
+        serializer = RepositorySerializer(repository)
+
+        return Response(serializer.data)
 
 class CommitViewSet(viewsets.ModelViewSet):
     queryset = Commit.objects.all()
@@ -31,7 +41,7 @@ class CommitViewSet(viewsets.ModelViewSet):
 
     def list(self, request):
         queryset = Commit.objects.filter(
-            repository__owner=request.user
+            repository__users__username=request.user.username
         ).order_by('-date')
 
         serializer = CommitSerializer(queryset, many=True)

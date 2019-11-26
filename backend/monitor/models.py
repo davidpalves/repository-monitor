@@ -4,21 +4,18 @@ from common.models import IndexedTimeStampedModel
 
 
 class Repository(IndexedTimeStampedModel):
-    owner = models.ForeignKey(
-        'users.User',
-        related_name='repositories',
-        on_delete=models.CASCADE
-    )
     users = models.ManyToManyField(
         'users.User',
         related_name='watched_repositories'
     )
-    name = models.CharField(max_length=255)
-    owner_username = models.CharField(max_length=255)
-    description = models.CharField(max_length=255)
+    full_name = models.CharField(max_length=255)
+    description = models.CharField(max_length=255, default=True)
+    owner_login = models.CharField(max_length=255)
+    owner_avatar_url = models.CharField(max_length=255, blank=True)
+    url = models.URLField()
 
     def __str__(self):
-        return f'{self.owner.username}/{self.name}'
+        return self.full_name
 
     class Meta:
         verbose_name = 'Repository'
@@ -28,8 +25,6 @@ class Repository(IndexedTimeStampedModel):
 class Author(IndexedTimeStampedModel):
     name = models.CharField(max_length=255)
     email = models.EmailField()
-    username = models.CharField(max_length=255, blank=False, null=False)
-    avatar_url = models.URLField()
 
     def __str__(self):
         return self.username
