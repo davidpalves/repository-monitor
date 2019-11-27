@@ -2,7 +2,7 @@ import axios from 'axios';
 import cookie from 'react-cookies';
 
 
-const baseURL = 'http://mogitor.herokuapp.com/api/v1/'
+const baseURL = 'https://mogitor.herokuapp.com/api/v1/'
 
 const axiosInstance = axios.create({
     baseURL,
