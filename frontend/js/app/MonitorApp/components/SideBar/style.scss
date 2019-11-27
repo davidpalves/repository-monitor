@@ -1,5 +1,7 @@
 .sidebar {
   height: calc(100vh - 64px);
+  position: fixed;
+  top: 64px;
   width: 20%;
   display: flex;
   border-right: 1px solid rgba(0, 0, 0, 0.2);

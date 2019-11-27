@@ -9,7 +9,7 @@ def create_repository(user, full_repository_name):
 
     try:
         if Repository.objects.filter(full_name=full_repository_name,
-                                     users__username=user):
+                                     users__username=user.username):
             raise ValidationError("Repository already added")
 
         retrieved_repository = github.get_repo(full_repository_name)

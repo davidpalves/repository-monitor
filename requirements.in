@@ -18,3 +18,4 @@ social-auth-app-django
 djangorestframework
 coreapi
 PyGithub
+django-cors-headers

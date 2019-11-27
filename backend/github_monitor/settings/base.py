@@ -23,7 +23,7 @@ ADMINS = (
 
 AUTH_USER_MODEL = 'users.User'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'import_export',
     'social_django',
     'rest_framework',
+    'corsheaders',
 
     'common',
     'users',
@@ -48,6 +49,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
