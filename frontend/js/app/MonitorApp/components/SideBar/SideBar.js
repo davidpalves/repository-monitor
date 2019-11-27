@@ -26,10 +26,13 @@ class SideBar extends React.Component {
 
   async send(event) {
     const { repo } = this.state;
-    
+    const { getData } = this.props;
+
     if (event.keyCode === this.ENTER_KEY) {
       event.preventDefault();
+      event.target.value = "";
       await repository.postRepository(repo);
+      getData();
     }
     
   }

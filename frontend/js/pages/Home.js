@@ -13,9 +13,15 @@ class Home extends React.Component {
     this.state = {
       data: []
     };
+
+    this.getData = this.getData.bind(this);
   }
 
-  async componentDidMount() {
+  componentDidMount() {
+    this.getData();
+  }
+  
+  async getData() {
     const { data } = await commits.getCommits();
 
     this.setState({
@@ -29,7 +35,7 @@ class Home extends React.Component {
       <div>
         <TopNavbar/>
         <CommitCard commit={data}/>
-        <SideBar/>
+        <SideBar getData={this.getData}/>
       </div>
     );
   }

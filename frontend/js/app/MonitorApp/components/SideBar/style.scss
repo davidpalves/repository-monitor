@@ -4,9 +4,11 @@
   top: 64px;
   width: 20%;
   display: flex;
+  flex-flow: column;
   border-right: 1px solid rgba(0, 0, 0, 0.2);
   align-items: center;
   text-align: center;
+  justify-content: center;
   background-color: rgba(255, 255, 255, 0.7);
 
   label {
