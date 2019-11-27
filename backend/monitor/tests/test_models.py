@@ -36,7 +36,7 @@ class TestCommit(TestCase):
             author=mommy.make(
                 'monitor.Author',
                 name='author',
-                username='authorlogin'
+                email='author@email.com'
             )
         )
 
@@ -57,7 +57,21 @@ class TestAuthor(TestCase):
     def test_str(self):
         self.assertEqual(
             str(self.author),
-            self.author.username
+            self.author.email
+        )
+
+    def tearDown(self):
+        self.author.delete()
+
+
+class TestOwner(TestCase):
+    def setUp(self):
+        self.author = mommy.make('monitor.Author')
+
+    def test_str(self):
+        self.assertEqual(
+            str(self.author),
+            self.author.email
         )
 
     def tearDown(self):

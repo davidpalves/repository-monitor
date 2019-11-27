@@ -9,7 +9,7 @@ class Repository(IndexedTimeStampedModel):
         related_name='watched_repositories'
     )
     full_name = models.CharField(max_length=255)
-    description = models.CharField(max_length=255, default=True)
+    description = models.CharField(max_length=255, null=True,blank=True)
     owner_login = models.CharField(max_length=255)
     owner_avatar_url = models.CharField(max_length=255, blank=True)
     url = models.URLField()
@@ -27,7 +27,7 @@ class Author(IndexedTimeStampedModel):
     email = models.EmailField()
 
     def __str__(self):
-        return self.username
+        return self.email
 
     class Meta:
         verbose_name = 'Author'

@@ -5,14 +5,14 @@ from datetime import datetime, timedelta
 
 
 def create_repository(user, full_repository_name):
-    g = Github(user.github.access_token)
+    github = Github(user.github.access_token)
 
     try:
         if Repository.objects.filter(full_name=full_repository_name,
                                      users__username=user):
             raise ValidationError("Repository already added")
 
-        retrieved_repository = g.get_repo(full_repository_name)
+        retrieved_repository = github.get_repo(full_repository_name)
 
         repository = Repository.objects.create(
             full_name=retrieved_repository.full_name,
