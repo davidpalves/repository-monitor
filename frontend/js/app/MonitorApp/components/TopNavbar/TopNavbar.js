@@ -18,9 +18,6 @@ class TopNavbar extends React.Component {
               <a href="/">Mo<strong><i>git</i></strong>or</a>
             </span>
           </li>
-          <li>
-            <span>Repositories Watched</span>
-          </li>
         </ul>
         <ul>
           <li className="logout">

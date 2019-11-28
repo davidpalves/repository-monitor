@@ -17,7 +17,8 @@ class AuthorSerializer(serializers.ModelSerializer):
 class CommitSerializer(serializers.ModelSerializer):
     repository = RepositorySerializer(read_only=True)
     author = AuthorSerializer(read_only=True)
+    date = serializers.DateTimeField(format="%b, %d, %Y at %H:%M:%S")
 
     class Meta:
         model = Commit
-        fields = ('id', 'sha', 'author', 'message', 'repository')
+        fields = ('id', 'sha', 'author', 'date', 'message', 'url', 'repository')

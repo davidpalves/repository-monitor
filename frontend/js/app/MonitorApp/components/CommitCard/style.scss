@@ -1,9 +1,40 @@
-.commit-card {
+.commit-section {
     position: relative;
     top: 78px;
-    left: 22%;
+    left: 25%;
     width: 75%;
     margin: 0;
     height: calc(100vh - 90px);
     overflow-y: auto;
+}
+
+
+.commit-card {
+  background-color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 15px;
+  padding: 10px 0px 10px 20px;
+  width: 90%;
+  border-radius: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+  border-radius: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
