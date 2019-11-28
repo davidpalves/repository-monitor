@@ -5,7 +5,7 @@ from . import views
 
 urlpatterns = [
     path('', views.home, name='home'),
-    path('hooks/', core_views.hook, name='hook'),
+    path('hooks/', views.hook, name='hook'),
 
 ]
 
