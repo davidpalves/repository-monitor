@@ -49,6 +49,6 @@ class CommitViewSet(viewsets.ModelViewSet): # noqa
         return Response(serializer.data)
 
 
-class AuthorViewSet(viewsets.ModelViewSet): #noqa
+class AuthorViewSet(viewsets.ModelViewSet): # noqa
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer

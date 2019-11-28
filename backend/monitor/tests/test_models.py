@@ -57,21 +57,7 @@ class TestAuthor(TestCase):
     def test_str(self):
         self.assertEqual(
             str(self.author),
-            self.author.email
-        )
-
-    def tearDown(self):
-        self.author.delete()
-
-
-class TestOwner(TestCase):
-    def setUp(self):
-        self.author = mommy.make('monitor.Author')
-
-    def test_str(self):
-        self.assertEqual(
-            str(self.author),
-            self.author.email
+            self.author.name
         )
 
     def tearDown(self):

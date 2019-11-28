@@ -24,20 +24,17 @@ class SideBar extends React.Component {
     });
   }
 
-  async send(event) {
+  send(event) {
     const { repo } = this.state;
     const { getData } = this.props;
 
     if (event.keyCode === this.ENTER_KEY) {
       event.preventDefault();
       event.target.value = "";
-      await repository.postRepository(repo)
+      repository.postRepository(repo)
         .catch(error => {
-          if (error.response.status == 404) {
-            alert("Repository not found")
-          } else {
-            alert("This repository is already watched")
-          }
+            const { data } = error.response
+            alert(data.detail || data[0])
         });
       getData();
     }
