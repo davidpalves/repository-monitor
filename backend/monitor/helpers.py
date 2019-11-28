@@ -51,14 +51,16 @@ def create_repository(user, full_repository_name):
         raise NotFound('Repository not found.')
 
 
-def create_webhook(self, name):
+def create_webhook(user, full_name_repository):
+    github = Github(user.github.access_token)
+
     try:
         hook_configs = {}
         hook_configs['url'] = settings.APP_BASE_URL + '/hooks/'
         hook_configs['content_type'] = 'json'
         hook_configs['secret'] = settings.GITHUB_WEBHOOK_KEY
 
-        repo = self.__github.get_user().get_repo(name)
+        repo = github.get_repo(full_name_repository)
         repo.create_hook(name="web", config=hook_configs, events=["push"], active=True)
     except GithubException as ex:
         # Validate if hook already exists:

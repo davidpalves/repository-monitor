@@ -21,6 +21,9 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 STATIC_ROOT = base_dir_join('staticfiles')
 STATIC_URL = '/static/'
 
+APP_BASE_URL = 'https://mogitor.herokuapp.com'
+
+
 MEDIA_ROOT = base_dir_join('mediafiles')
 MEDIA_URL = '/media/'
 

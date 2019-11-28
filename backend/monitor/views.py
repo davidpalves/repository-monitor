@@ -15,7 +15,7 @@ from django.http import HttpResponse, HttpResponseForbidden, HttpResponseServerE
 
 from .serializers import RepositorySerializer, CommitSerializer, AuthorSerializer
 from .models import Repository, Commit, Author
-from .helpers import create_repository
+from .helpers import create_repository, create_webhook
 
 
 @login_required
@@ -41,6 +41,12 @@ class RepositoryViewSet(viewsets.ModelViewSet): # noqa
             full_repository_name=request.data['full_name'],
             user=request.user
         )
+
+        create_webhook(
+            user=request.user,
+            full_name_repository=request._data['full_name']
+        )
+
         serializer = RepositorySerializer(repository)
 
         return Response(serializer.data)
