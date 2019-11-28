@@ -1,7 +1,17 @@
-from django.shortcuts import render
-from django.contrib.auth.decorators import login_required
+import hmac
+import json
+from hashlib import sha1
+
 from rest_framework import viewsets
 from rest_framework.response import Response
+
+from django.conf import settings
+from django.utils.encoding import force_bytes
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
+from django.shortcuts import render, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse, HttpResponseForbidden, HttpResponseServerError
 
 from .serializers import RepositorySerializer, CommitSerializer, AuthorSerializer
 from .models import Repository, Commit, Author
@@ -52,3 +62,54 @@ class CommitViewSet(viewsets.ModelViewSet): # noqa
 class AuthorViewSet(viewsets.ModelViewSet): # noqa
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
+
+
+@require_POST
+@csrf_exempt
+def hook(request):
+
+    header_signature = request.META.get('HTTP_X_HUB_SIGNATURE')
+    if header_signature is None:
+        return HttpResponseForbidden('Permission denied.')
+
+    sha_name, signature = header_signature.split('=')
+    if sha_name != 'sha1':
+        return HttpResponseServerError('Operation not supported.', status=501)
+
+    mac = hmac.new(force_bytes(settings.GITHUB_WEBHOOK_KEY), msg=force_bytes(request.body), digestmod=sha1)
+    if not hmac.compare_digest(force_bytes(mac.hexdigest()), force_bytes(signature)):
+        return HttpResponseForbidden('Permission denied.')
+
+    event = request.META.get('HTTP_X_GITHUB_EVENT', 'ping')
+
+    if event == 'ping':
+        return HttpResponse('pong')
+    elif event == 'push':
+        body_unicode = request.body.decode('utf-8')
+        body = json.loads(body_unicode)
+        commits = body['commits']
+        repository_full_name = body['repository']['full_name']
+
+        queryset = Repository.objects.all()
+        repository = get_object_or_404(queryset, full_name=repository_full_name)
+
+        for commit in commits:
+
+            author, _ = Author.objects.get_or_create(
+                name=commit['author']['name'],
+                email=commit['author']['email'],
+            )
+
+            Commit.objects.create(
+                repository=repository,
+                author=author,
+                sha=commit['id'],
+                message=commit['message'],
+                date=commit['timestamp'],
+                url=commit['url']
+            )
+
+        return HttpResponse('success')
+
+    # Neither a ping or push
+    return HttpResponse(status=204)

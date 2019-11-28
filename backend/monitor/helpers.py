@@ -1,7 +1,9 @@
-from github import Github, UnknownObjectException
+from github import Github, UnknownObjectException, GithubException
 from rest_framework.exceptions import ValidationError, NotFound
-from .models import Repository, Author, Commit
 from datetime import datetime, timedelta
+from django.conf import settings
+
+from .models import Repository, Author, Commit
 
 
 def create_repository(user, full_repository_name):
@@ -43,5 +45,24 @@ def create_repository(user, full_repository_name):
         repository.users.add(user)
         repository.save()
 
+        return repository
+
     except UnknownObjectException:
         raise NotFound('Repository not found.')
+
+
+def create_webhook(self, name):
+    try:
+        hook_configs = {}
+        hook_configs['url'] = settings.APP_BASE_URL + '/hooks/'
+        hook_configs['content_type'] = 'json'
+        hook_configs['secret'] = settings.GITHUB_WEBHOOK_KEY
+
+        repo = self.__github.get_user().get_repo(name)
+        repo.create_hook(name="web", config=hook_configs, events=["push"], active=True)
+    except GithubException as ex:
+        # Validate if hook already exists:
+        for error in ex.data['errors']:
+            if error['message'] == 'Hook already exists on this repository':
+                return
+        raise NotFound("Could not create webhook.")
