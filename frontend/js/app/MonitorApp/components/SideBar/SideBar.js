@@ -1,5 +1,5 @@
 import React from 'react';
-import repository from '../../../../services/commits'
+import repository from '../../../../services/repositories'
 
 import './style.scss';
 
@@ -31,12 +31,19 @@ class SideBar extends React.Component {
     if (event.keyCode === this.ENTER_KEY) {
       event.preventDefault();
       event.target.value = "";
-      await repository.postRepository(repo);
+      await repository.postRepository(repo)
+        .catch(error => {
+          if (error.response.status == 404) {
+            alert("Repository not found")
+          } else {
+            alert("This repository is already watched")
+          }
+        });
       getData();
     }
-    
+
   }
-  
+
   render() {
     return (
       <div className="sidebar">

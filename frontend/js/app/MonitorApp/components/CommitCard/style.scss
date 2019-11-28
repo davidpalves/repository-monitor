@@ -17,6 +17,31 @@
   border-radius: 5px;
   border: 1px solid rgba(0, 0, 0, 0.2);
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
+
+  .title-section {
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+  }
+  .repo-name {
+    flex: 1;
+  }
+
+  .sha{
+    margin-right: 2%;
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 11pt;
+  }
+
+  .commit-message{
+    margin-top: 10px;
+    font-size: 13pt;
+  }
+
+  .commit-author{
+    font-size: 11pt;
+    color: rgba(0, 0, 0, 0.6);
+  }
 }
 
 ::-webkit-scrollbar {

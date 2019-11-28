@@ -21,13 +21,16 @@ class CommitCard extends React.Component {
               commit && commit.map(( item, key ) => {
                   return (
                     <div className='commit-card'>
-                      <h4>{ item.repository.full_name }</h4>
-                      <p>{ item.message }</p>
-                      <p>{ item.author ? item.author.name : "" } commited on { item.date }</p>
+                      <div className="title-section">
+                        <h4 className="repo-name">{ item.repository.full_name }</h4>
+                        <span className="sha">SHA: { item.sha }</span>
+                      </div>
+                      <p className="commit-message">{ item.message }</p>
+                      <p className="commit-author">{ item.author ? item.author.name : "" } commited on { item.date }</p>
                       <small>
                         <a href={ item.url } target="_blank"
                         rel="noopener noreferrer">
-                          { item.sha }
+                          See changes
                         </a>
                       </small>
                     </div>
