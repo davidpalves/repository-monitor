@@ -17,7 +17,7 @@ class AuthorSerializer(serializers.ModelSerializer):
 class CommitSerializer(serializers.ModelSerializer):
     repository = RepositorySerializer(read_only=True)
     author = AuthorSerializer(read_only=True)
-    date = serializers.DateTimeField(format="%b, %d, %Y at %H:%M:%S")
+    date = serializers.DateTimeField(format="%b %d, %Y at %H:%M:%S")
 
     class Meta:
         model = Commit

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import TopNavbar from '../app/MonitorApp/components/TopNavbar/TopNavbar';
 import SideBar from '../app/MonitorApp/components/SideBar/SideBar'
-import CommitCard from '../app/MonitorApp/components/CommitCard/CommitCard'
+import CommitList from '../app/MonitorApp/components/CommitCard/CommitList'
 import commits from '../services/commits'
 
 import '../../sass/pages/home.scss'
@@ -20,7 +20,7 @@ class Home extends React.Component {
   componentDidMount() {
     this.getData();
   }
-  
+
   async getData() {
     const { data } = await commits.getCommits();
 
@@ -28,13 +28,13 @@ class Home extends React.Component {
       data
     });
   }
- 
+
   render() {
     const { data } = this.state;
     return (
       <div>
         <TopNavbar/>
-        <CommitCard commit={data}/>
+        <CommitList commit={data}/>
         <SideBar getData={this.getData}/>
       </div>
     );
