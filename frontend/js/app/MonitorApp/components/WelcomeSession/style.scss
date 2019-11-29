@@ -1,0 +1,58 @@
+.welcome-session {
+  position: relative;
+  top: 25vh;
+  height: calc(100vh - 64px);
+
+  h1{
+    text-align: center;
+
+  }
+
+  form {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+
+    label {
+      font-size: 24px;
+      text-align: center;
+      flex: 1;
+    }
+
+    .search-form{
+      width: 100%;
+
+      button {
+        background-color: #fff;
+        margin-left: 5px;
+        box-shadow: none;
+        border: 1px solid rgba(0, 0, 0, 0.4);
+        padding: 5px 10px 5px 10px;
+        border-radius: 5px;
+
+        &:hover {
+          color: #fff;
+          background-color: rgba(0, 0, 0, 0.7);
+          border: 1px solid #fff;
+        }
+      }
+
+    }
+
+    input {
+      background: none;
+      text-align: left;
+      width: 70%;
+      border: none;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+      flex: 1;
+
+      &:focus {
+        outline: none;
+        border-bottom: 1px solid rgba(50, 50, 50, 0.8);
+      }
+    }
+  }
+}

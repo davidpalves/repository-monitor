@@ -22,6 +22,21 @@
     }
   }
 
+  .active {
+    font-weight: bold;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  }
+
+  .nav-link {
+    margin-right: 5px;
+    color: #fff;
+
+    &:hover{
+      text-decoration: none;
+      color: #fff;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    }
+  }
 
   .brand {
     font-size: 1.5em;
@@ -36,7 +51,7 @@
 
     span {
       display: block;
-      color: white;
+      color: #fff;
       text-align: center;
       padding: 14px 16px;
       text-decoration: none;

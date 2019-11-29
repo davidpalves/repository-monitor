@@ -1,13 +1,16 @@
 import React from 'react';
 import { hot } from 'react-hot-loader';
 
-import Home from './pages/Home';
 import SentryBoundary from './utils/SentryBoundary';
+import AppContainer from './AppContainer'
 
-const App = () => (
-  <SentryBoundary>
-    <Home />
-  </SentryBoundary>
-);
+const App = () => {
+
+  return(
+    <SentryBoundary>
+      <AppContainer/>
+    </SentryBoundary>
+  );
+};
 
 export default hot(module)(App);
