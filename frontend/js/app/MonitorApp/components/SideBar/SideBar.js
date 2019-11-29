@@ -21,6 +21,7 @@ class SideBar extends React.Component {
     const { value } = event.target;
     this.setState({
       repo: value,
+      error: false,
     });
   }
 
@@ -29,13 +30,21 @@ class SideBar extends React.Component {
     const { getData } = this.props;
 
     if (event.keyCode === this.ENTER_KEY) {
+
       event.preventDefault();
       event.target.value = "";
+
       await repository.postRepository(repo)
         .catch(error => {
             const { data } = error.response
+
+            this.setState({
+              error: true
+            });
+
             alert(data.detail || data[0])
         });
+
       getData();
     }
 

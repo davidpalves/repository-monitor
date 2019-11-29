@@ -2,6 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom'
 
 import repository from '../../../../services/repositories'
+import Alert from '../Alert/Alert'
 
 import './style.scss'
 
@@ -13,11 +14,14 @@ class WelcomeSession extends React.Component {
     this.state = {
       repo: "",
       redirect: false,
+      error: false,
+      message: "",
     };
 
     this.ENTER_KEY = 13;
 
     this.send = this.send.bind(this);
+    this.dismissAlert = this.dismissAlert.bind(this);
     this.onChange = this.onChange.bind(this);
     this.onClick = this.onClick.bind(this);
   }
@@ -37,7 +41,11 @@ class WelcomeSession extends React.Component {
     await repository.postRepository(repo)
       .catch(error => {
           const { data } = error.response
-          alert(data.detail || data[0])
+
+          this.setState({
+            error: true,
+            message: (data.detail || data[0]),
+          })
       });
 
     this.setState({
@@ -51,27 +59,49 @@ class WelcomeSession extends React.Component {
 
     if (event.keyCode === this.ENTER_KEY) {
       event.preventDefault();
-      event.target.value = "";
       await repository.postRepository(repo)
         .catch(error => {
             const { data } = error.response
-            alert(data.detail || data[0])
+
+            this.setState({
+              error: true,
+              message: (data.detail || data[0]),
+            })
         });
 
       this.setState({
         redirect: true
       });
-      }
     }
+  }
+
+  dismissAlert(){
+    this.setState({
+      error: false
+    })
+  }
 
     render() {
       const { redirect } = this.state;
-      if(redirect) {
+
+      const { error } = this.state;
+
+      const { message } = this.state;
+
+      if(redirect && !error) {
         return <Redirect to='/commits' />
       } else {
         return (
+
           <div className="welcome-session">
-          <h1>Watch your repositories commits easily</h1>
+
+            <Alert
+              error={error}
+              message={ message }
+              dismissAlert={this.dismissAlert}
+            />
+
+            <h1>Watch your repositories commits easily</h1>
             <form>
               <label>Search one of yours repositories</label>
               <div className="search-form">

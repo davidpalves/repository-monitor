@@ -1,0 +1,45 @@
+.alert-modal {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.alert-title{
+  display: flex;
+  flex-flow: row nowrap;
+  margin-bottom: 20px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-bottom: 1px solid rgba(0,0,0,0.4);
+
+  .title{
+    flex: 1;
+    font-weight: bold;
+    text-align: center;
+    align-items: center;
+  }
+
+}
+
+.alert-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 40%;
+}
+
+.close {
+  color: #aaa;
+  position: relative;
+  cursor: pointer;
+  bottom: 30px;
+  font-size: 42px;
+  font-weight: bold;
+}
