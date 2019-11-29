@@ -16,9 +16,9 @@ class CommitList extends React.Component {
       <div className="commit-section">
         <h1 className="commits-section-title">Latest commits</h1>
           {
-            commit && commit.map(( item, key ) => {
+            commit && commit.map(( item, index ) => {
                 return (
-                  <CommitCard item={item}/>
+                  <CommitCard item={item} key={index}/>
                 )
             })
           }

@@ -60,18 +60,18 @@ class WelcomeSession extends React.Component {
     if (event.keyCode === this.ENTER_KEY) {
       event.preventDefault();
       await repository.postRepository(repo)
-        .catch(error => {
-            const { data } = error.response
+      .then(() => this.setState({ redirect: true }))
+      .catch(error => {
+          const { data } = error.response
 
-            this.setState({
-              error: true,
-              message: (data.detail || data[0]),
-            })
-        });
-
-      this.setState({
-        redirect: true
+          this.setState({
+            error: true,
+            message: (data.detail || data[0]),
+          })
       });
+
+      const { redirect, error } = this.state;
+      if(redirect && !error) return <Redirect to='/commits' />
     }
   }
 
@@ -81,42 +81,32 @@ class WelcomeSession extends React.Component {
     })
   }
 
-    render() {
-      const { redirect } = this.state;
+  render() {
+    const { message, error } = this.state;
 
-      const { error } = this.state;
+    return (
+      <div className="welcome-session">
+        <Alert
+          error={error}
+          message={ message }
+          dismissAlert={this.dismissAlert}
+        />
 
-      const { message } = this.state;
-
-      if(redirect && !error) {
-        return <Redirect to='/commits' />
-      } else {
-        return (
-
-          <div className="welcome-session">
-
-            <Alert
-              error={error}
-              message={ message }
-              dismissAlert={this.dismissAlert}
-            />
-
-            <h1>Watch your repositories commits easily</h1>
-            <form>
-              <label>Search one of yours repositories</label>
-              <div className="search-form">
-                <input
-                  type='text'
-                  placeholder='User/Repository'
-                  onChange={this.onChange}
-                  onKeyDown={this.send}
-                  />
-                  <button onClick={this.onClick}>Go!</button>
-                </div>
-            </form>
-          </div>
-        );
-    }
+        <h1>Watch your repositories commits easily</h1>
+        <form>
+          <label>Search one of yours repositories</label>
+          <div className="search-form">
+            <input
+              type='text'
+              placeholder='User/Repository'
+              onChange={this.onChange}
+              onKeyDown={this.send}
+              />
+              <button onClick={this.onClick}>Go!</button>
+            </div>
+        </form>
+      </div>
+    );
   }
 };
 

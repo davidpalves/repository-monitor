@@ -5,7 +5,7 @@
   top: 0;
   width: 100%;
   height: 100%;
-  overflow: auto;
+  overflow: hidden;
   background-color: rgba(0,0,0,0.4);
 }
 
@@ -28,6 +28,7 @@
 }
 
 .alert-content {
+  position: relative;
   background-color: #fefefe;
   margin: 15% auto;
   padding: 20px;
@@ -36,10 +37,13 @@
 }
 
 .close {
+  background: transparent;
+  border: none;
   color: #aaa;
-  position: relative;
+  position: absolute;
+  right: 15px;
   cursor: pointer;
-  bottom: 30px;
+  top: -10px;
   font-size: 42px;
   font-weight: bold;
 }
