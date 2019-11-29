@@ -153,7 +153,7 @@ LOGOUT_REDIRECT_URL = 'home'
 SOCIAL_AUTH_STORAGE = 'users.storage.GithubSocialStorage'
 
 SOCIAL_AUTH_GITHUB_SCOPE = [
-    'user:email', 'read:user', 'repo', 'user', 'read:org', 'admin:repo_hook'
+    'user:email', 'read:user', 'repo', 'read:org', 'admin:repo_hook'
 ]
 
 SOCIAL_AUTH_GITHUB_KEY = config('SOCIAL_AUTH_GITHUB_KEY')
