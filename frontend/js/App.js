@@ -2,7 +2,7 @@ import React from 'react';
 import { hot } from 'react-hot-loader';
 
 import SentryBoundary from './utils/SentryBoundary';
-import AppContainer from './AppContainer'
+import AppContainer from './pages/AppContainer'
 
 const App = () => {
 

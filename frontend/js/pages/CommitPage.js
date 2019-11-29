@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+
 import TopNavbar from '../app/MonitorApp/components/TopNavbar/TopNavbar';
 import SideBar from '../app/MonitorApp/components/SideBar/SideBar'
 import CommitList from '../app/MonitorApp/components/CommitCard/CommitList'

@@ -38,6 +38,7 @@ class WelcomeSession extends React.Component {
 
     event.preventDefault();
     event.target.value = "";
+
     await repository.postRepository(repo)
       .catch(error => {
           const { data } = error.response
@@ -66,7 +67,7 @@ class WelcomeSession extends React.Component {
       })
       .catch(error => {
         const { data } = error.response
-        
+
         this.setState({
           error: true,
           message: (data.detail || data[0]),

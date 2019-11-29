@@ -1,9 +1,9 @@
 import React from 'react';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 
-import Home from './pages/Home';
-import CommitPage from './pages/CommitPage';
-import TopNavbar from './app/MonitorApp/components/TopNavbar/TopNavbar'
+import Home from './Home';
+import CommitPage from './CommitPage';
+import TopNavbar from '../app/MonitorApp/components/TopNavbar/TopNavbar'
 
 const AppContainer = () => {
 
