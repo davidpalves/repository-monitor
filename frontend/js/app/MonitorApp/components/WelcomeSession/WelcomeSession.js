@@ -1,5 +1,5 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 import repository from '../../../../services/repositories'
 import Alert from '../Alert/Alert'
@@ -56,22 +56,25 @@ class WelcomeSession extends React.Component {
 
   async send(event) {
     const { repo } = this.state;
+    const { history } = this.props;
 
     if (event.keyCode === this.ENTER_KEY) {
       event.preventDefault();
       await repository.postRepository(repo)
-      .then(() => this.setState({ redirect: true }))
+      .then(() => {
+        this.setState({ redirect: true });
+      })
       .catch(error => {
-          const { data } = error.response
-
-          this.setState({
-            error: true,
-            message: (data.detail || data[0]),
-          })
+        const { data } = error.response
+        
+        this.setState({
+          error: true,
+          message: (data.detail || data[0]),
+        })
       });
 
       const { redirect, error } = this.state;
-      if(redirect && !error) return <Redirect to='/commits' />
+      if(redirect && !error) history.push('/commits');
     }
   }
 
@@ -110,4 +113,4 @@ class WelcomeSession extends React.Component {
   }
 };
 
-export default WelcomeSession;
+export default withRouter(WelcomeSession);
