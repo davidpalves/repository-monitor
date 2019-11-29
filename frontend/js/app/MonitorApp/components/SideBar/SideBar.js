@@ -45,7 +45,7 @@ class SideBar extends React.Component {
     return (
       <div className="sidebar">
         <form>
-          <label>Search a new repository</label>
+          <label>Search one of yours repositories</label>
           <input
             type='text'
             placeholder='User/Repository'

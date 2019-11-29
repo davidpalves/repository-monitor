@@ -16,6 +16,9 @@ def create_repository(user, full_repository_name):
 
         retrieved_repository = github.get_repo(full_repository_name)
 
+        if retrieved_repository.owner.login != user.username:
+            raise ValidationError("You don't have permissions to watch this repository")
+
         repository = Repository.objects.create(
             full_name=retrieved_repository.full_name,
             description=retrieved_repository.description,
@@ -61,8 +64,13 @@ def create_webhook(user, full_name_repository):
         hook_configs['secret'] = settings.GITHUB_WEBHOOK_KEY
 
         repo = github.get_repo(full_name_repository)
+
+        if repo.owner.login != user.username:
+            raise ValidationError("You don't have permissions to watch this repository")
+
         repo.create_hook(name="web", config=hook_configs, events=["push"], active=True)
     except GithubException as ex:
+        print(ex.data)
         for error in ex.data['errors']:
             if error['message'] == 'Hook already exists on this repository':
                 return

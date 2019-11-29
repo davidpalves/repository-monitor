@@ -71,9 +71,9 @@ class WelcomeSession extends React.Component {
       } else {
         return (
           <div className="welcome-session">
-          <h1>Watch repositories commits easily</h1>
+          <h1>Watch your repositories commits easily</h1>
             <form>
-              <label>Search a new repository</label>
+              <label>Search one of yours repositories</label>
               <div className="search-form">
                 <input
                   type='text'
