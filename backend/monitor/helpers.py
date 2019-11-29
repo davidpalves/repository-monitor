@@ -63,6 +63,7 @@ def create_webhook(user, full_name_repository):
         repo = github.get_repo(full_name_repository)
         repo.create_hook(name="web", config=hook_configs, events=["push"], active=True)
     except GithubException as ex:
+        for error in ex.data['errors']:
             if error['message'] == 'Hook already exists on this repository':
                 return
         raise NotFound("Could not create webhook.")
