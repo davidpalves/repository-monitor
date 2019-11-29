@@ -43,8 +43,8 @@ class RepositoryViewSet(viewsets.ModelViewSet): # noqa
         )
 
         create_webhook(
+            full_repository_name=request.data['full_name'],
             user=request.user,
-            full_name_repository=request.data['full_name']
         )
 
         serializer = RepositorySerializer(repository)
@@ -88,9 +88,7 @@ def hook(request):
 
     event = request.META.get('HTTP_X_GITHUB_EVENT', 'ping')
 
-    if event == 'ping':
-        return HttpResponse('pong')
-    elif event == 'push':
+    if event == 'push':
         body_unicode = request.body.decode('utf-8')
         body = json.loads(body_unicode)
         commits = body['commits']

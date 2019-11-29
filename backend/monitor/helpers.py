@@ -14,10 +14,9 @@ def create_repository(user, full_repository_name):
                                      users__username=user.username):
             raise ValidationError("Repository already added")
 
-        retrieved_repository = github.get_repo(full_repository_name)
+        name = full_repository_name.split('/')[1]
 
-        if retrieved_repository.owner.login != user.username:
-            raise ValidationError("You don't have permissions to watch this repository")
+        retrieved_repository = github.get_user().get_repo(name)
 
         repository = Repository.objects.create(
             full_name=retrieved_repository.full_name,
@@ -51,10 +50,10 @@ def create_repository(user, full_repository_name):
         return repository
 
     except UnknownObjectException:
-        raise NotFound('Repository not found.')
+        raise NotFound('Repository not found on your Github account.')
 
 
-def create_webhook(user, full_name_repository):
+def create_webhook(user, full_repository_name):
     github = Github(user.github.access_token)
 
     try:
@@ -63,12 +62,21 @@ def create_webhook(user, full_name_repository):
         hook_configs['content_type'] = 'json'
         hook_configs['secret'] = settings.GITHUB_WEBHOOK_KEY
 
-        repo = github.get_repo(full_name_repository)
+        name = full_repository_name.split('/')[1]
 
-        if repo.owner.login != user.username:
-            raise ValidationError("You don't have permissions to watch this repository")
+        retrieved_repository = github.get_user().get_repo(name)
 
-        repo.create_hook(name="web", config=hook_configs, events=["push"], active=True)
+        if retrieved_repository.owner.login != user.username:
+            raise ValidationError(
+                    "You don't have permissions to watch this repository"
+                )
+
+        retrieved_repository.create_hook(
+            name="web", 
+            config=hook_configs,
+            events=["push"], 
+            active=True)
+
     except GithubException as ex:
         print(ex.data)
         for error in ex.data['errors']:
