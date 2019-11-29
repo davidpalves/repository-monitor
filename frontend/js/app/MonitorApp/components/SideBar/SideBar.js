@@ -1,5 +1,7 @@
 import React from 'react';
+
 import repository from '../../../../services/repositories'
+import Alert from '../Alert/Alert'
 
 import './style.scss';
 
@@ -8,13 +10,17 @@ class SideBar extends React.Component {
     super(props);
 
     this.state = {
-      repo: ""
+      repo: "",
+      message: "",
+      error: false,
     };
 
     this.ENTER_KEY = 13;
 
     this.send = this.send.bind(this);
     this.onChange = this.onChange.bind(this);
+    this.dismissAlert = this.dismissAlert.bind(this);
+
   }
 
   onChange(event) {
@@ -23,6 +29,12 @@ class SideBar extends React.Component {
       repo: value,
       error: false,
     });
+  }
+
+  dismissAlert(){
+    this.setState({
+      error: false
+    })
   }
 
   async send(event) {
@@ -39,10 +51,9 @@ class SideBar extends React.Component {
             const { data } = error.response
 
             this.setState({
-              error: true
+              error: true,
+              message: (data.detail || data[0]),
             });
-
-            alert(data.detail || data[0])
         });
 
       getData();
@@ -51,8 +62,15 @@ class SideBar extends React.Component {
   }
 
   render() {
+    const { message, error } = this.state;
+
     return (
       <div className="sidebar">
+        <Alert
+          error={error}
+          message={ message }
+          dismissAlert={this.dismissAlert}
+        />
         <form>
           <label>Search one of yours repositories</label>
           <input
