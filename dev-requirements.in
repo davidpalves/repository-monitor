@@ -6,5 +6,3 @@ model-mommy
 pre-commit
 prospector[with-vulture]
 safety
-coreapi
-ipdb

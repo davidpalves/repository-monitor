@@ -58,7 +58,7 @@ class CommitViewSet(viewsets.ModelViewSet): # noqa
     def list(self, request):
         queryset = Commit.objects.filter(
             repository__users__username=request.user.username
-        ).order_by('-date')
+        ).select_related('author', 'repository').order_by('-date')
 
         serializer = CommitSerializer(queryset, many=True)
 

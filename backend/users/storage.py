@@ -1,6 +1,6 @@
 from social_django.models import DjangoStorage
 
-from users.models import GithubUser
+from .models import GithubUser
 
 
 class GithubSocialStorage(DjangoStorage):

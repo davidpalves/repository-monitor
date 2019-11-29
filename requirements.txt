@@ -9,11 +9,9 @@ backcall==0.1.0           # via ipython
 billiard==3.6.1.0         # via celery
 brotlipy==0.7.0
 celery[redis]==4.3.0
-certifi==2019.9.11        # via requests, sentry-sdk
+certifi==2019.11.28       # via requests, sentry-sdk
 cffi==1.13.2              # via brotlipy
 chardet==3.0.4            # via requests
-coreapi==2.3.3
-coreschema==0.0.4         # via coreapi
 decorator==4.4.1          # via ipython, traitlets
 defusedxml==0.6.0         # via odfpy, python3-openid, social-auth-core
 deprecated==1.2.7         # via pygithub
@@ -32,14 +30,11 @@ gunicorn==20.0.4
 idna==2.8                 # via requests
 importlib-metadata==0.23  # via kombu
 ipython-genutils==0.2.0   # via traitlets
-ipython==7.9.0
-itypes==1.1.0             # via coreapi
+ipython==7.10.0
 jdcal==1.4.1              # via openpyxl
 jedi==0.15.1              # via ipython
-jinja2==2.10.3            # via coreschema
 kombu==4.6.6              # via celery
 markuppy==1.14            # via tablib
-markupsafe==1.1.1         # via jinja2
 more-itertools==7.2.0     # via zipp
 oauthlib==3.1.0           # via requests-oauthlib, social-auth-core
 odfpy==1.4.0              # via tablib
@@ -47,13 +42,13 @@ openpyxl==3.0.2           # via tablib
 parso==0.5.1              # via jedi
 pexpect==4.7.0            # via ipython
 pickleshare==0.7.5        # via ipython
-prompt-toolkit==2.0.10    # via ipython
+prompt-toolkit==3.0.1     # via ipython
 psutil==5.6.7
 psycopg2==2.8.4
 ptyprocess==0.6.0         # via pexpect
 pycparser==2.19           # via cffi
 pygithub==1.44.1
-pygments==2.5.1           # via ipython
+pygments==2.5.2           # via ipython
 pyjwt==1.7.1              # via pygithub, social-auth-core
 python-decouple==3.3
 python3-openid==3.1.0     # via social-auth-core
@@ -61,15 +56,14 @@ pytz==2019.3              # via celery, django
 pyyaml==5.1.2             # via tablib
 redis==3.3.11             # via celery
 requests-oauthlib==1.3.0  # via social-auth-core
-requests==2.22.0          # via coreapi, pygithub, requests-oauthlib, social-auth-core
+requests==2.22.0          # via pygithub, requests-oauthlib, social-auth-core
 sentry-sdk==0.13.4
-six==1.13.0               # via prompt-toolkit, pygithub, social-auth-app-django, social-auth-core, traitlets
+six==1.13.0               # via pygithub, social-auth-app-django, social-auth-core, traitlets
 social-auth-app-django==3.1.0
 social-auth-core==3.2.0   # via social-auth-app-django
 sqlparse==0.3.0           # via django
 tablib==0.14.0            # via django-import-export
 traitlets==4.3.3          # via ipython
-uritemplate==3.0.0        # via coreapi
 urllib3==1.25.7           # via requests, sentry-sdk
 vine==1.3.0               # via amqp, celery
 wcwidth==0.1.7            # via prompt-toolkit

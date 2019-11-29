@@ -9,7 +9,6 @@ urlpatterns = [
 
 ]
 
-
 router = DefaultRouter()
 router.register('repositories', views.RepositoryViewSet, base_name='repositories')
 router.register('commits', views.CommitViewSet, base_name='commits')

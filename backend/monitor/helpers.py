@@ -1,6 +1,7 @@
+from datetime import datetime, timedelta
+
 from github import Github, UnknownObjectException, GithubException
 from rest_framework.exceptions import ValidationError, NotFound
-from datetime import datetime, timedelta
 from django.conf import settings
 
 from .models import Repository, Author, Commit
@@ -30,12 +31,14 @@ def create_repository(user, full_repository_name):
 
         commits = retrieved_repository.get_commits(since=last_month)
 
+        commits_list = []
+
         for commit in commits:
             author, _ = Author.objects.get_or_create(
                 name=commit.commit.author.name,
                 email=commit.commit.author.email,
             )
-            Commit.objects.create(
+            commit_to_be_added = Commit(
                 repository=repository,
                 author=author,
                 sha=commit.sha,
@@ -44,8 +47,11 @@ def create_repository(user, full_repository_name):
                 url=commit. html_url
             )
 
+            commits_list.append(commit_to_be_added)
+
+        Commit.objects.bulk_create(commits_list)
+
         repository.users.add(user)
-        repository.save()
 
         return repository
 
@@ -68,14 +74,15 @@ def create_webhook(user, full_repository_name):
 
         if retrieved_repository.owner.login != user.username:
             raise ValidationError(
-                    "You don't have permissions to watch this repository"
-                )
+                "You don't have permissions to watch this repository"
+            )
 
         retrieved_repository.create_hook(
-            name="web", 
+            name="web",
             config=hook_configs,
-            events=["push"], 
-            active=True)
+            events=["push"],
+            active=True
+        )
 
     except GithubException as ex:
         print(ex.data)
