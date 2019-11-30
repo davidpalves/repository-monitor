@@ -10,7 +10,7 @@ class RepositorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Repository
-        depth = 1
+        depth = 2
         fields = (
             'id',
             'full_name',
@@ -34,4 +34,12 @@ class CommitSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Commit
-        fields = ('id', 'sha', 'author', 'date', 'message', 'url', 'repository')
+        fields = (
+            'id',
+            'sha',
+            'author',
+            'date',
+            'message',
+            'url',
+            'repository'
+        )

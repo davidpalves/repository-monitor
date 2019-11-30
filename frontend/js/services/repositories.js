@@ -7,6 +7,10 @@ class Repositories {
             full_name: data,
         })
     }
+
+    static getRepository(id) {
+      return http.get(`repositories/${id}/`)
+    }
 }
 
 export default Repositories;
