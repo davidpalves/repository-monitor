@@ -14,7 +14,7 @@ const AppContainer = () => {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/commits" component={CommitPage} />
-          <Route exact path="/repository/:repositoryId" component={RepositoryDetailPage} />
+          <Route path="/repository/:repositoryId" component={RepositoryDetailPage} />
         </Switch>
     </Router>
   );

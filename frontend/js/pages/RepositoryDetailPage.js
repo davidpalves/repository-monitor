@@ -15,15 +15,27 @@ class RepositoryDetailPage extends React.Component {
       data: []
     };
 
-    this.getData = this.getData.bind(this);
+    this.getRepositoryData = this.getRepositoryData.bind(this);
+    this.redirectCommitsList = this.redirectCommitsList.bind(this);
   }
 
   componentDidMount() {
-    this.getData();
+    this.getRepositoryData();
   }
 
-  async getData() {
-    const { data } = await repositories.getRepository(17);
+  async getRepositoryData() {
+    const id = this.props.match.params.repositoryId
+
+    const { data } = await repositories.getRepository(id);
+
+    this.setState({
+      data
+    });
+  }
+
+
+  async redirectCommitsList() {
+    const { data } = await commits.getCommits();
 
     this.setState({
       data
@@ -32,12 +44,15 @@ class RepositoryDetailPage extends React.Component {
 
   render() {
     const { data } = this.state;
-    console.log(data);
     return (
       <div>
         <TopNavbar/>
-        <CommitList commit={data.commits}/>
-        <SideBar getData={this.getData}/>
+        <CommitList
+          commit={data.commits}
+          full_name={data.full_name}
+          id={data.id}
+        />
+        <SideBar getData={this.redirectCommitsList}/>
       </div>
     );
   }

@@ -10,7 +10,7 @@ class RepositorySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Repository
-        depth = 2
+        depth = 1
         fields = (
             'id',
             'full_name',
