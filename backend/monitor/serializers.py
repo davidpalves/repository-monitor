@@ -4,13 +4,13 @@ from .models import Repository, Commit, Author
 
 
 class RepositorySerializer(serializers.ModelSerializer):
+    commits = serializers.SerializerMethodField()
     description = serializers.CharField(read_only=True)
     owner_login = serializers.CharField(read_only=True)
     url = serializers.URLField(read_only=True)
 
     class Meta:
         model = Repository
-        depth = 1
         fields = (
             'id',
             'full_name',
@@ -18,6 +18,20 @@ class RepositorySerializer(serializers.ModelSerializer):
             'description',
             'commits',
             'url'
+        )
+
+    def get_commits(self, obj):
+        commits = Commit.objects.filter(repository_id=obj.id)
+        serializer = CommitSerializer(commits, many=True)
+        return serializer.data
+
+
+class RepositoryNameIdSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Repository
+        fields = (
+            'id',
+            'full_name'
         )
 
 
@@ -28,8 +42,8 @@ class AuthorSerializer(serializers.ModelSerializer):
 
 
 class CommitSerializer(serializers.ModelSerializer):
-    repository = RepositorySerializer(read_only=True)
     author = AuthorSerializer(read_only=True)
+    repository = RepositoryNameIdSerializer(read_only=True)
     date = serializers.DateTimeField(format="%b %d, %Y at %H:%M:%S")
 
     class Meta:
