@@ -19,7 +19,7 @@ class SideBar extends React.Component {
 
     this.send = this.send.bind(this);
     this.onChange = this.onChange.bind(this);
-    this.dismissAlert = this.dismissAlert.bind(this);
+    this.handleDismissAlert = this.handleDismissAlert.bind(this);
 
   }
 
@@ -31,7 +31,7 @@ class SideBar extends React.Component {
     });
   }
 
-  dismissAlert(){
+  handleDismissAlert(){
     this.setState({
       error: false
     })
@@ -69,7 +69,7 @@ class SideBar extends React.Component {
         <Alert
           error={error}
           message={ message }
-          dismissAlert={this.dismissAlert}
+          handleDismissAlert={this.handleDismissAlert}
         />
         <form>
           <label>Search one of yours repositories</label>

@@ -1,25 +1,15 @@
-import React, { useState } from 'react';
-import WelcomeSession from '../app/MonitorApp/components/WelcomeSession/WelcomeSession'
+import React from 'react';
 
-import '../../sass/pages/home.scss'
+import WelcomeSession from '../app/MonitorApp/components/WelcomeSession/WelcomeSession';
 
-class Home extends React.Component {
-  constructor(props) {
-    super(props);
+import '../../sass/pages/home.scss';
 
-    this.state = {
-      data: []
-    };
-
-  }
-
-  render() {
-    return (
-      <div>
-        <WelcomeSession/>
-      </div>
-    );
-  }
-}
+const Home = () => {
+  return (
+    <div>
+      <WelcomeSession />
+    </div>
+  );
+};
 
 export default Home;

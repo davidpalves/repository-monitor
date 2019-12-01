@@ -2,13 +2,12 @@ import React from 'react';
 import { hot } from 'react-hot-loader';
 
 import SentryBoundary from './utils/SentryBoundary';
-import AppContainer from './pages/AppContainer'
+import AppContainer from './pages/AppContainer';
 
 const App = () => {
-
-  return(
+  return (
     <SentryBoundary>
-      <AppContainer/>
+      <AppContainer />
     </SentryBoundary>
   );
 };

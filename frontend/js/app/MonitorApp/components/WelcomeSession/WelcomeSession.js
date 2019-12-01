@@ -21,7 +21,7 @@ class WelcomeSession extends React.Component {
     this.ENTER_KEY = 13;
 
     this.send = this.send.bind(this);
-    this.dismissAlert = this.dismissAlert.bind(this);
+    this.handleDismissAlert = this.handleDismissAlert.bind(this);
     this.onChange = this.onChange.bind(this);
     this.onClick = this.onClick.bind(this);
   }
@@ -79,7 +79,7 @@ class WelcomeSession extends React.Component {
     }
   }
 
-  dismissAlert(){
+  handleDismissAlert(){
     this.setState({
       error: false
     })
@@ -93,7 +93,7 @@ class WelcomeSession extends React.Component {
         <Alert
           error={error}
           message={ message }
-          dismissAlert={this.dismissAlert}
+          handleDismissAlert={this.handleDismissAlert}
         />
 
         <h1>Watch your repositories commits easily</h1>

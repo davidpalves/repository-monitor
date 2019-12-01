@@ -4,42 +4,36 @@ import { Link, NavLink } from 'react-router-dom';
 import './style.scss';
 
 const TopNavbar = () => {
+  const { login } = context;
 
   return (
     <nav className="top-navbar">
       <ul>
         <li>
           <span className="brand">
-            <Link to="/">Mo<strong><i>git</i></strong>or</Link>
+            <Link to="/">
+              Mo
+              <strong>
+                <i>git</i>
+              </strong>
+              or
+            </Link>
           </span>
         </li>
         <li>
-          <NavLink
-            exact
-            activeClassName="active"
-            className="nav-link"
-            to="/"
-          >
+          <NavLink activeClassName="active" className="nav-link" exact to="/">
             Home
           </NavLink>
         </li>
         <li>
-          <NavLink
-            exact
-            activeClassName="active"
-            className="nav-link"
-            to="/commits"
-          >
+          <NavLink activeClassName="active" className="nav-link" exact to="/commits">
             Commits List
           </NavLink>
-
         </li>
       </ul>
       <ul>
         <li>
-          <span>
-            { context.login }
-          </span>
+          <span>{login}</span>
         </li>
         <li className="logout">
           <span>
@@ -49,7 +43,6 @@ const TopNavbar = () => {
       </ul>
     </nav>
   );
-
-}
+};
 
 export default TopNavbar;

@@ -1,21 +1,21 @@
 import React from 'react';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 
+import TopNavbar from '../app/MonitorApp/components/TopNavbar/TopNavbar';
+
 import Home from './Home';
 import CommitPage from './CommitPage';
 import RepositoryDetailPage from './RepositoryDetailPage';
-import TopNavbar from '../app/MonitorApp/components/TopNavbar/TopNavbar'
 
 const AppContainer = () => {
-
-  return(
+  return (
     <Router>
-      <TopNavbar/>
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/commits" component={CommitPage} />
-          <Route path="/repository/:repositoryId" component={RepositoryDetailPage} />
-        </Switch>
+      <TopNavbar />
+      <Switch>
+        <Route component={Home} exact path="/" />
+        <Route component={CommitPage} exact path="/commits" />
+        <Route component={RepositoryDetailPage} path="/repository/:repositoryId" />
+      </Switch>
     </Router>
   );
 };
