@@ -11,7 +11,6 @@ class Repository(IndexedTimeStampedModel):
     full_name = models.CharField(max_length=255)
     description = models.CharField(max_length=255, null=True,blank=True)
     owner_login = models.CharField(max_length=255)
-    owner_avatar_url = models.CharField(max_length=255, blank=True)
     url = models.URLField()
 
     def __str__(self):

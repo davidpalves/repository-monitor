@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'
 
 import './style.scss'
 
@@ -13,11 +14,13 @@ class CommitCard extends React.Component {
   }
 
   render() {
-    const { item } = this.props;
+    const { item, full_name, id } = this.props;
     return (
         <div className='commit-card'>
           <div className="title-section">
-            <h4 className="repo-name">{ item.repository.full_name }</h4>
+            <h4 className="repo-name">
+              { <Link to={`/repository/${id}`}>{ item.repository.full_name || full_name }</Link>  }
+            </h4>
             <span className="sha">SHA: { item.sha }</span>
           </div>
           <p className="commit-message">{ item.message }</p>
