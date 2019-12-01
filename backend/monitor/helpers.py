@@ -15,7 +15,10 @@ def create_repository(user, full_repository_name):
                                      users__username=user.username):
             raise ValidationError("Repository already added")
 
-        name = full_repository_name.split('/')[1]
+        try:
+            name = full_repository_name.split('/')[1]
+        except IndexError:
+            raise ValidationError("Repository name not in the correct format.")
 
         retrieved_repository = github.get_user().get_repo(name)
 
