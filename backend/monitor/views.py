@@ -94,8 +94,8 @@ def hook(request):
         commits = body['commits']
         repository_full_name = body['repository']['full_name']
 
-        queryset = Repository.objects.all()
-        repository = get_object_or_404(queryset, full_name=repository_full_name)
+        repositories = Repository.objects.all()
+        repository = get_object_or_404(repositories, full_name=repository_full_name)
 
         for commit in commits:
 
