@@ -69,6 +69,16 @@ class AuthorViewSet(viewsets.ModelViewSet): # noqa
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
 
+    def list(self, request):
+        queryset = Author.objects.filter(
+            commits__repository__users__username=request.user.username
+        )
+
+        serializer = AuthorSerializer(queryset, many=True)
+
+        return Response(serializer.data)
+
+
 
 @require_POST
 @csrf_exempt
