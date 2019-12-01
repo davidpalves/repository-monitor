@@ -14,12 +14,12 @@ class CommitCard extends React.Component {
   }
 
   render() {
-    const { item, full_name, id } = this.props;
+    const { item, fullName, id } = this.props;
     return (
         <div className='commit-card'>
           <div className="title-section">
             <h4 className="repo-name">
-              { <Link to={`/repository/${id}`}>{ item.repository.full_name || full_name }</Link>  }
+              { <Link to={`/repository/${id}`}>{ item.repository.full_name || fullName }</Link>  }
             </h4>
             <span className="sha">SHA: { item.sha }</span>
           </div>

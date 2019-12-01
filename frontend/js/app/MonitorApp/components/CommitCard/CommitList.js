@@ -11,11 +11,11 @@ class CommitList extends React.Component {
   }
 
   render() {
-    const { commit, full_name, id } = this.props;
+    const { commit, fullName, id } = this.props;
     return (
       <div className="commit-section">
         <h1 className="commits-section-title">
-          Latest commits { full_name && `on ${full_name}`}
+          Latest commits { fullName && `on ${fullName}`}
         </h1>
           {
             commit && commit.map(( item, index ) => {
@@ -23,7 +23,7 @@ class CommitList extends React.Component {
                   <CommitCard
                     item={item}
                     key={index}
-                    full_name={full_name}
+                    fullName={fullName}
                     id={item.repository.id || id}
                   />
                 )

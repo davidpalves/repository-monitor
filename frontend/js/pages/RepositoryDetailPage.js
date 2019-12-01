@@ -49,7 +49,7 @@ class RepositoryDetailPage extends React.Component {
         <TopNavbar/>
         <CommitList
           commit={data.commits}
-          full_name={data.full_name}
+          fullName={data.full_name}
           id={data.id}
         />
         <SideBar getData={this.redirectCommitsList}/>
