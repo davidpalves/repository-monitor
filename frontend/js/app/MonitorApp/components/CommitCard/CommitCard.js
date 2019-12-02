@@ -12,7 +12,6 @@ class CommitCard extends React.Component {
 
   render() {
     const { fullName, item, id } = this.props;
-    console.log(item)
     return (
       <div className="commit-card">
         <div className="title-section">

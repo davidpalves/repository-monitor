@@ -1,18 +1,20 @@
 import React from 'react';
 
+import CommitList from '../app/MonitorApp/components/CommitCard/CommitList';
 import TopNavbar from '../app/MonitorApp/components/TopNavbar/TopNavbar';
-import SideBar from '../app/MonitorApp/components/SideBar/SideBar'
-import CommitList from '../app/MonitorApp/components/CommitCard/CommitList'
-import commits from '../services/commits'
+import Loading from '../app/MonitorApp/components/Loading/Loading';
+import SideBar from '../app/MonitorApp/components/SideBar/SideBar';
+import commits from '../services/commits';
 
-import '../../sass/pages/home.scss'
+import '../../sass/pages/home.scss';
 
 class CommitPage extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      data: []
+      data: [],
+      loading: false
     };
 
     this.getData = this.getData.bind(this);
@@ -23,7 +25,12 @@ class CommitPage extends React.Component {
   }
 
   async getData() {
-    const { data } = await commits.getCommits();
+    this.setState({ loading: true });
+    debugger
+    const { data } = await commits.getCommits().then(response => {
+      this.setState({ loading: false });
+      return response;
+    });
 
     this.setState({
       data
@@ -31,11 +38,11 @@ class CommitPage extends React.Component {
   }
 
   render() {
-    const { data } = this.state;
+    const { data, loading } = this.state;
     return (
       <div>
         <TopNavbar/>
-        <CommitList commit={data}/>
+        {loading ? <Loading loading={loading} /> : <CommitList commit={data}/> }
         <SideBar getData={this.getData}/>
       </div>
     );

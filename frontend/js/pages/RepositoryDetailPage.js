@@ -1,8 +1,9 @@
 import React from 'react';
 
+import CommitList from '../app/MonitorApp/components/CommitCard/CommitList'
 import TopNavbar from '../app/MonitorApp/components/TopNavbar/TopNavbar';
 import SideBar from '../app/MonitorApp/components/SideBar/SideBar'
-import CommitList from '../app/MonitorApp/components/CommitCard/CommitList'
+import Loading from '../app/MonitorApp/components/Loading/Loading'
 import repositories from '../services/repositories'
 
 import '../../sass/pages/home.scss'
@@ -12,7 +13,8 @@ class RepositoryDetailPage extends React.Component {
     super(props);
 
     this.state = {
-      data: []
+      data: [],
+      loading: false
     };
 
     this.getRepositoryData = this.getRepositoryData.bind(this);
@@ -25,17 +27,12 @@ class RepositoryDetailPage extends React.Component {
 
   async getRepositoryData() {
     const id = this.props.match.params.repositoryId
+    this.setState({ loading: true });
 
-    const { data } = await repositories.getRepository(id);
-
-    this.setState({
-      data
+    const { data } = await repositories.getRepository(id).then(response => {
+      this.setState({ loading: false });
+      return response;
     });
-  }
-
-
-  async redirectCommitsList() {
-    const { data } = await commits.getCommits();
 
     this.setState({
       data
@@ -43,15 +40,18 @@ class RepositoryDetailPage extends React.Component {
   }
 
   render() {
-    const { data } = this.state;
+    const { data, loading } = this.state;
     return (
       <div>
         <TopNavbar/>
-        <CommitList
-          commit={data.commits}
-          fullName={data.full_name}
-          id={data.id}
-        />
+        {loading ?
+          <Loading loading={loading}/> :
+          <CommitList
+            commit={data.commits}
+            fullName={data.full_name}
+            id={data.id}
+          />
+        }
         <SideBar getData={this.redirectCommitsList}/>
       </div>
     );
