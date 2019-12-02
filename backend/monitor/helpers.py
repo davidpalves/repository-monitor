@@ -26,7 +26,6 @@ def create_repository(user, full_repository_name):
             full_name=retrieved_repository.full_name,
             description=retrieved_repository.description,
             owner_login=retrieved_repository.owner.login,
-            owner_avatar_url=retrieved_repository.owner.avatar_url,
             url=retrieved_repository.html_url
         )
 

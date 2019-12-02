@@ -26,7 +26,6 @@ class CommitPage extends React.Component {
 
   async getData() {
     this.setState({ loading: true });
-    debugger
     const { data } = await commits.getCommits().then(response => {
       this.setState({ loading: false });
       return response;
