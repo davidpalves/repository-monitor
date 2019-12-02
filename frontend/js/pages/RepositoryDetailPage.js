@@ -1,12 +1,14 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 
-import CommitList from '../app/MonitorApp/components/CommitCard/CommitList'
+import CommitList from '../app/MonitorApp/components/CommitCard/CommitList';
 import TopNavbar from '../app/MonitorApp/components/TopNavbar/TopNavbar';
-import SideBar from '../app/MonitorApp/components/SideBar/SideBar'
-import Loading from '../app/MonitorApp/components/Loading/Loading'
-import repositories from '../services/repositories'
+import SideBar from '../app/MonitorApp/components/SideBar/SideBar';
+import Loading from '../app/MonitorApp/components/Loading/Loading';
+import repositories from '../services/repositories';
+import commits from '../services/commits';
 
-import '../../sass/pages/home.scss'
+import '../../sass/pages/home.scss';
 
 class RepositoryDetailPage extends React.Component {
   constructor(props) {
@@ -17,6 +19,7 @@ class RepositoryDetailPage extends React.Component {
       loading: false
     };
 
+    this.getData = this.getData.bind(this);
     this.getRepositoryData = this.getRepositoryData.bind(this);
   }
 
@@ -33,13 +36,24 @@ class RepositoryDetailPage extends React.Component {
       return response;
     });
 
-    this.setState({
-      data
+    this.setState({ data });
+  }
+
+  async getData() {
+    const { history } = this.props;
+    this.setState({ loading: true });
+    const { data } = await commits.getCommits().then(response => {
+      this.setState({ loading: false });
+      return response;
     });
+    
+    history.push('/commits');
+    this.setState({ data });
   }
 
   render() {
     const { data, loading } = this.state;
+
     return (
       <div>
         <TopNavbar/>
@@ -51,10 +65,10 @@ class RepositoryDetailPage extends React.Component {
             id={data.id}
           />
         }
-        <SideBar/>
+        <SideBar getData={this.getData}/>
       </div>
     );
   }
 }
 
-export default RepositoryDetailPage;
+export default withRouter(RepositoryDetailPage);

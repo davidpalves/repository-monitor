@@ -31,9 +31,7 @@ class CommitPage extends React.Component {
       return response;
     });
 
-    this.setState({
-      data
-    });
+    this.setState({ data });
   }
 
   render() {
