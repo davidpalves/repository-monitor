@@ -18,7 +18,6 @@ class RepositoryDetailPage extends React.Component {
     };
 
     this.getRepositoryData = this.getRepositoryData.bind(this);
-    this.redirectCommitsList = this.redirectCommitsList.bind(this);
   }
 
   componentDidMount() {
@@ -52,7 +51,7 @@ class RepositoryDetailPage extends React.Component {
             id={data.id}
           />
         }
-        <SideBar getData={this.redirectCommitsList}/>
+        <SideBar/>
       </div>
     );
   }
