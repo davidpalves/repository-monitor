@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 
+from django.db import IntegrityError
 from github import Github, UnknownObjectException, GithubException
 from rest_framework.exceptions import ValidationError, NotFound
 from django.conf import settings
@@ -13,12 +14,12 @@ def create_repository(user, full_repository_name):
     try:
         name = full_repository_name.split('/')[1]
     except IndexError:
-        raise ValidationError("Repository name not in the correct format.")
+        raise ValidationError('Repository name not in the correct format.')
 
     try:
         if Repository.objects.filter(name=name,
                                      users__username=user.username):
-            raise ValidationError("Repository already added")
+            raise ValidationError('Repository already added.')
 
         retrieved_repository = github.get_user().get_repo(name)
 
@@ -60,6 +61,8 @@ def create_repository(user, full_repository_name):
 
     except UnknownObjectException:
         raise NotFound('Repository not found on your Github account.')
+    except IntegrityError:
+        raise ValidationError('Repository already added.')
 
 
 def create_webhook(user, full_repository_name):

@@ -42,10 +42,10 @@ class RepositoryViewSet(viewsets.ModelViewSet): # noqa
             user=request.user
         )
 
-        # create_webhook(
-        #     full_repository_name=request.data['full_name'],
-        #     user=request.user,
-        # )
+        create_webhook(
+            full_repository_name=request.data['full_name'],
+            user=request.user,
+        )
 
         serializer = RepositorySerializer(repository)
 
