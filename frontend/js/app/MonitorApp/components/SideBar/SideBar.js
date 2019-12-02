@@ -20,6 +20,7 @@ class SideBar extends React.Component {
     this.send = this.send.bind(this);
     this.onChange = this.onChange.bind(this);
     this.handleDismissAlert = this.handleDismissAlert.bind(this);
+    this.onClick = this.onClick.bind(this);
 
   }
 
@@ -37,6 +38,26 @@ class SideBar extends React.Component {
     })
   }
 
+  async onClick(event) {
+    const { repo } = this.state;
+    const { getData } = this.props;
+
+    event.preventDefault();
+    event.target.value = "";
+
+    await repository.postRepository(repo).then(() => {
+      getData();
+    })
+      .catch(error => {
+          const { data } = error.response
+
+          this.setState({
+            error: true,
+            message: (data.detail || data[0]),
+          });
+      });
+  }
+
   async send(event) {
     const { repo } = this.state;
     const { getData } = this.props;
@@ -46,7 +67,9 @@ class SideBar extends React.Component {
       event.preventDefault();
       event.target.value = "";
 
-      await repository.postRepository(repo)
+      await repository.postRepository(repo).then(() => {
+        getData();
+      })
         .catch(error => {
             const { data } = error.response
 
@@ -55,10 +78,7 @@ class SideBar extends React.Component {
               message: (data.detail || data[0]),
             });
         });
-
-      getData();
     }
-
   }
 
   render() {
@@ -79,6 +99,7 @@ class SideBar extends React.Component {
             onChange={this.onChange}
             onKeyDown={this.send}
             />
+          <button className="search-button" onClick={this.onClick}>Go!</button>
         </form>
       </div>
     );

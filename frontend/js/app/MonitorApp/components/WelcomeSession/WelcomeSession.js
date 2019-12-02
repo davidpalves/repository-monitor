@@ -37,22 +37,22 @@ class WelcomeSession extends React.Component {
     const { repo } = this.state;
 
     event.preventDefault();
-    event.target.value = "";
 
     await repository.postRepository(repo)
-      .catch(error => {
-          const { data } = error.response
+    .then(() => {
+      this.setState({ redirect: true });
+    })
+    .catch(error => {
+      const { data } = error.response
 
-          this.setState({
-            error: true,
-            message: (data.detail || data[0]),
-          })
-      });
-
-    this.setState({
-      redirect: true
+      this.setState({
+        error: true,
+        message: (data.detail || data[0]),
+      })
     });
 
+    const { redirect, error } = this.state;
+    if(redirect && !error) history.push('/commits');
   }
 
   async send(event) {
