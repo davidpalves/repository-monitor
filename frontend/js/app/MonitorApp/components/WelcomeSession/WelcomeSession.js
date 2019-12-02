@@ -39,17 +39,16 @@ class WelcomeSession extends React.Component {
     event.preventDefault();
 
     await repository.postRepository(repo)
-    .then(() => {
-      this.setState({ redirect: true });
-    })
     .catch(error => {
       const { data } = error.response
-
+      
       this.setState({
         error: true,
         message: (data.detail || data[0]),
       })
     });
+    
+    this.setState({ redirect: true });
 
     const { redirect, error } = this.state;
     if(redirect && !error) history.push('/commits');
@@ -62,17 +61,15 @@ class WelcomeSession extends React.Component {
     if (event.keyCode === this.ENTER_KEY) {
       event.preventDefault();
       await repository.postRepository(repo)
-      .then(() => {
-        this.setState({ redirect: true });
-      })
       .catch(error => {
         const { data } = error.response
-
+        
         this.setState({
           error: true,
           message: (data.detail || data[0]),
         })
       });
+      this.setState({ redirect: true });
 
       const { redirect, error } = this.state;
       if(redirect && !error) history.push('/commits');
