@@ -11,19 +11,20 @@ def create_repository(user, full_repository_name):
     github = Github(user.github.access_token)
 
     try:
-        if Repository.objects.filter(full_name=full_repository_name,
+        name = full_repository_name.split('/')[1]
+    except IndexError:
+        raise ValidationError("Repository name not in the correct format.")
+
+    try:
+        if Repository.objects.filter(name=name,
                                      users__username=user.username):
             raise ValidationError("Repository already added")
-
-        try:
-            name = full_repository_name.split('/')[1]
-        except IndexError:
-            raise ValidationError("Repository name not in the correct format.")
 
         retrieved_repository = github.get_user().get_repo(name)
 
         repository = Repository.objects.create(
             full_name=retrieved_repository.full_name,
+            name=retrieved_repository.name,
             description=retrieved_repository.description,
             owner_login=retrieved_repository.owner.login,
             url=retrieved_repository.html_url

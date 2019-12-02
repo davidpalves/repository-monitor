@@ -9,7 +9,8 @@ class Repository(IndexedTimeStampedModel):
         related_name='watched_repositories'
     )
     full_name = models.CharField(max_length=255)
-    description = models.CharField(max_length=255, null=True,blank=True)
+    name = models.CharField(max_length=255)
+    description = models.CharField(max_length=255, null=True, blank=True)
     owner_login = models.CharField(max_length=255)
     url = models.URLField()
 
