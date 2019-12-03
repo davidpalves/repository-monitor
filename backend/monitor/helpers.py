@@ -61,8 +61,6 @@ def create_repository(user, full_repository_name):
 
     except UnknownObjectException:
         raise NotFound('Repository not found on your Github account.')
-    except IntegrityError:
-        raise ValidationError('Repository already added.')
 
 
 def create_webhook(user, full_repository_name):

@@ -20,7 +20,6 @@ class Repository(IndexedTimeStampedModel):
     class Meta:
         verbose_name = 'Repository'
         verbose_name_plural = 'Repositories'
-        unique_together = ('name', 'owner_login')
 
 
 class Author(IndexedTimeStampedModel):
