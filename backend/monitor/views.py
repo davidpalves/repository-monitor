@@ -31,11 +31,9 @@ class RepositoryViewSet(viewsets.ModelViewSet): # noqa
     queryset = Repository.objects.all()
     serializer_class = RepositorySerializer
 
-    def list(self, request, *args, **kwargs):
-        queryset = request.user.watched_repositories.all()
-        serializer = RepositorySerializer(queryset, many=True)
-        return Response(serializer.data)
-
+    def get_queryset(self):
+        return self.request.user.watched_repositories.all()
+        
     def create(self, request, *args, **kwargs):
         repository = create_repository(
             full_repository_name=request.data['full_name'],
@@ -55,29 +53,21 @@ class CommitViewSet(viewsets.ModelViewSet): # noqa
     queryset = Commit.objects.all()
     serializer_class = CommitSerializer
 
-    def list(self, request):
-        queryset = Commit.objects.filter(
-            repository__users__username=request.user.username
+    def get_queryset(self):
+        return Commit.objects.filter(
+            repository__users__username=self.request.user.username
         ).select_related('author', 'repository').order_by('-date')
 
-        serializer = CommitSerializer(queryset, many=True)
-
-        return Response(serializer.data)
 
 
 class AuthorViewSet(viewsets.ModelViewSet): # noqa
     queryset = Author.objects.all()
     serializer_class = AuthorSerializer
 
-    def list(self, request):
-        queryset = Author.objects.filter(
-            commits__repository__users__username=request.user.username
+    def get_queryset(self):
+        return Author.objects.filter(
+            commits__repository__users__username=self.request.user.username
         )
-
-        serializer = AuthorSerializer(queryset, many=True)
-
-        return Response(serializer.data)
-
 
 
 @require_POST

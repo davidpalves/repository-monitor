@@ -24,9 +24,9 @@ class CommitPage extends React.Component {
     this.getData();
   }
 
-  async getData() {
+  async getData(pageUrl=null) {
     this.setState({ loading: true });
-    const { data } = await commits.getCommits().then(response => {
+    const { data } = await commits.getCommits(pageUrl).then(response => {
       this.setState({ loading: false });
       return response;
     });
@@ -39,7 +39,11 @@ class CommitPage extends React.Component {
     return (
       <div>
         <TopNavbar/>
-        {loading ? <Loading loading={loading} /> : <CommitList commit={data}/> }
+        {
+          loading 
+          ? <Loading loading={loading} />
+          : <CommitList commit={data} getData={this.getData}s/>
+        }
         <SideBar getData={this.getData}/>
       </div>
     );
