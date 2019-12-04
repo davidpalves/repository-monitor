@@ -13,8 +13,13 @@ def create_repository(user, full_repository_name):
 
     try:
         name = full_repository_name.split('/')[1]
+        owner = full_repository_name.split('/')[0]
+        github.get_user(owner)
     except IndexError:
         raise ValidationError('Repository name not in the correct format.')
+    except UnknownObjectException:
+        raise NotFound('Repository owner not found.')
+
 
     try:
         if Repository.objects.filter(name=name,
