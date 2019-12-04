@@ -22,7 +22,7 @@ class CommitList extends React.Component {
 
   render() {
     const { commit, fullName, id } = this.props;
-    
+
 
     return (
       <div className="commit-section">
@@ -30,7 +30,7 @@ class CommitList extends React.Component {
           <h1 className="commits-section-title">Latest commits {fullName && `on ${fullName}`}</h1>
           {
            (commit && (commit.next || commit.previous))
-           && 
+           &&
            (<Pagination getPage={this.getPage} nextPage={commit.next} prevPage={commit.previous}/>)
           }
         </div>

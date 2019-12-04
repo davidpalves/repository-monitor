@@ -2,24 +2,31 @@ import React from 'react';
 
 import './style.scss';
 
-const Pagination = ( props ) => {
+const Pagination = (props) => {
+  const { getPage, nextPage, prevPage } = props;
 
-    const { getPage, nextPage, prevPage } = props;
-
-    return (
-        <div className='pagination'>
-            {
-                prevPage ? 
-                <button onClick={() => getPage(prevPage)} className="prevPage" type="button">◀</button>
-                : <button disabled className="prevPage" type="button">◀</button>
-            }
-            {
-                nextPage ? 
-                <button onClick={() => getPage(nextPage)} className="nextPage"type="button">▶</button>
-                : <button disabled className="nextPage" type="button">▶</button>
-            }
-        </div>
-    );
-}
+  return (
+    <div className="pagination">
+      {prevPage ? (
+        <button className="prevPage" type="button" onClick={() => getPage(prevPage)}>
+          ◀
+        </button>
+      ) : (
+        <button className="prevPage" disabled type="button">
+          ◀
+        </button>
+      )}
+      {nextPage ? (
+        <button className="nextPage" type="button" onClick={() => getPage(nextPage)}>
+          ▶
+        </button>
+      ) : (
+        <button className="nextPage" disabled type="button">
+          ▶
+        </button>
+      )}
+    </div>
+  );
+};
 
 export default Pagination;
