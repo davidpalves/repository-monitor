@@ -1,3 +1,5 @@
+@import '../colors';
+
 .commit-section {
     position: relative;
     top: 78px;
@@ -17,13 +19,13 @@
 }
 
 .commit-card {
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: $lightWhite;
   margin-bottom: 15px;
   padding: 10px 0px 10px 20px;
   width: 90%;
   border-radius: 5px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
+  border: 1px solid $shadowDark;
+  box-shadow: 1px 1px 10px $shadowDark;
 
   .title-section {
     display: flex;
@@ -35,13 +37,13 @@
     font-weight: 600;
 
     a {
-      color: black;
+      color: $primaryColor;
     }
   }
 
   .sha{
     margin-right: 2%;
-    color: rgba(0, 0, 0, 0.5);
+    color: $lightGrey;
     font-size: 11pt;
   }
 
@@ -52,26 +54,26 @@
 
   .commit-author{
     font-size: 11pt;
-    color: rgba(0, 0, 0, 0.6);
+    color: $lightGrey;
   }
 }
 
 ::-webkit-scrollbar {
-  width: 5px;
+  width: 8px;
   border-radius: 5px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: $white;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #888;
+  background: $lightGrey;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: $hoverDark;
 }

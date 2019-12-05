@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './style.scss';
+import '../../../../../sass/components/loading.scss';
 
 const Loading = () => {
   return <div className="loader" />;

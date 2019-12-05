@@ -1,3 +1,5 @@
+@import '../colors';
+
 .pagination {
 
     button {
@@ -6,10 +8,10 @@
         border: none;
         padding: 5px 10px 5px 10px;
         border-radius: 5px;
-
+        margin-left: 8px;
         &:hover:enabled {
-            background-color: rgba(41, 43, 41, 0.8);
-            color: #fff;
+            background-color: $hoverDark;
+            color: $white;
         }
     }
 }

@@ -1,6 +1,7 @@
+@import '../colors';
 
 .top-navbar {
-    background-color: #292b2c;
+    background-color: $primaryColor;
     position: fixed;
     top: 0;
     display: flex;
@@ -24,22 +25,22 @@
 
   .active {
     font-weight: bold;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    border-bottom: 1px solid $lightWhite;
   }
 
   .nav-link {
     margin-right: 5px;
-    color: #fff;
+    color: $white;
 
     &:hover{
       text-decoration: none;
-      color: #fff;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+      color: $white;
+      border-bottom: 1px solid $lightWhite;
     }
   }
 
   .brand {
-    font-size: 1.5em;
+    font-size: 1.5rem;
 
     a:hover {
       text-decoration: none;
@@ -51,16 +52,16 @@
 
     span {
       display: block;
-      color: #fff;
+      color: $white;
       text-align: center;
       padding: 14px 16px;
       text-decoration: none;
 
       a  {
-          color: #f1f1f1;
+          color: $white;
           text-decoration: none;
           &:hover {
-            color: #fff;
+            color: $white;
             text-decoration: underline;
           }
         }

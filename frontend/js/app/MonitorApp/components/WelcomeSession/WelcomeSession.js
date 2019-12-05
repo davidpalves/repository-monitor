@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom'
 import repository from '../../../../services/repositories'
 import Alert from '../Alert/Alert'
 
-import './style.scss'
+import '../../../../../sass/components/welcomeSession.scss';
 
 class WelcomeSession extends React.Component {
 
@@ -41,13 +41,13 @@ class WelcomeSession extends React.Component {
     await repository.postRepository(repo)
     .catch(error => {
       const { data } = error.response
-      
+
       this.setState({
         error: true,
         message: (data.detail || data[0]),
       })
     });
-    
+
     this.setState({ redirect: true });
 
     const { redirect, error } = this.state;
@@ -63,7 +63,7 @@ class WelcomeSession extends React.Component {
       await repository.postRepository(repo)
       .catch(error => {
         const { data } = error.response
-        
+
         this.setState({
           error: true,
           message: (data.detail || data[0]),

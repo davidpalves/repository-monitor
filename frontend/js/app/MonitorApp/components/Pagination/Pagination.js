@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './style.scss';
+import '../../../../../sass/components/pagination.scss';
 
 const Pagination = (props) => {
   const { getPage, nextPage, prevPage } = props;

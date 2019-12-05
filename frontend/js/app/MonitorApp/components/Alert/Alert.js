@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './style.scss';
+import '../../../../../sass/components/alert.scss';
 
 const Alert = (props) => {
   const { error, handleDismissAlert, message } = props;

@@ -1,3 +1,5 @@
+@import '../colors';
+
 .welcome-session {
   position: relative;
   top: 25vh;
@@ -28,13 +30,13 @@
         background-color: transparent;
         margin-left: 5px;
         box-shadow: none;
-        border: 1px solid rgba(0, 0, 0, 0.4);
+        border: 1px solid $lightDark;
         padding: 5px 10px 5px 10px;
         border-radius: 5px;
 
         &:hover {
           color: #fff;
-          background-color: rgba(0, 0, 0, 0.7);
+          background-color: $hoverDark;
           border: 1px solid #fff;
         }
       }
@@ -46,12 +48,12 @@
       text-align: left;
       width: 70%;
       border: none;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+      border-bottom: 1px solid $lightDark;
       flex: 1;
 
       &:focus {
         outline: none;
-        border-bottom: 1px solid rgba(50, 50, 50, 0.8);
+        border-bottom: 1px solid $focusDark;
       }
     }
   }

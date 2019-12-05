@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
-import './style.scss';
+import '../../../../../sass/components/topNavbar.scss';
 
 const TopNavbar = () => {
   const { login } = context;

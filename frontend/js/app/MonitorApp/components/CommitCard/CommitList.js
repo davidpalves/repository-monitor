@@ -3,7 +3,7 @@ import React from 'react';
 import CommitCard from './CommitCard';
 import Pagination from '../Pagination/Pagination';
 
-import './style.scss';
+import '../../../../../sass/components/commits.scss';
 
 class CommitList extends React.Component {
   constructor(props) {

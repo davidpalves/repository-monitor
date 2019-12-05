@@ -1,3 +1,5 @@
+@import '../colors';
+
 .sidebar {
   height: calc(100vh - 64px);
   position: fixed;
@@ -5,28 +7,28 @@
   width: 20%;
   display: flex;
   flex-flow: column;
-  border-right: 1px solid rgba(0, 0, 0, 0.2);
+  border-right: 1px solid $shadowDark;
   align-items: center;
   text-align: center;
   justify-content: center;
-  background-color: rgba(255, 255, 255, 0.7);
-  box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
+  background-color: $lightWhite;
+  box-shadow: 1px 1px 10px $shadowDark;
 
   form {
     .search-button {
       background-color: transparent;
       margin-left: 5px;
       box-shadow: none;
-      border: 1px solid rgba(0, 0, 0, 0.4);
+      border: 1px solid $lightDark;
       padding: 5px 10px 5px 10px;
       border-radius: 5px;
       flex: 1;
       margin-top: 10px;
 
       &:hover {
-        color: #fff;
-        background-color: rgba(0, 0, 0, 0.7);
-        border: 1px solid #fff;
+        color: $white;
+        background-color: $hoverDark;
+        border: 1px solid $white;
       }
     }
   }
@@ -40,11 +42,11 @@
     text-align: left;
     width: 80%;
     border: none;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+    border-bottom: 1px solid $lightDark;
 
     &:focus {
       outline: none;
-      border-bottom: 1px solid rgba(50, 50, 50, 0.8);
+      border-bottom: 1px solid $focusDark;
     }
   }
 

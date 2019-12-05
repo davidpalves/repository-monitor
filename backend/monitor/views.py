@@ -15,7 +15,7 @@ from django.http import HttpResponse, HttpResponseForbidden, HttpResponseServerE
 
 from .serializers import RepositorySerializer, CommitSerializer, AuthorSerializer
 from .models import Repository, Commit, Author
-from .helpers import create_repository, create_webhook
+from .services import create_repository, create_webhook
 
 
 @login_required
@@ -33,7 +33,7 @@ class RepositoryViewSet(viewsets.ModelViewSet): # noqa
 
     def get_queryset(self):
         return self.request.user.watched_repositories.all()
-        
+
     def create(self, request, *args, **kwargs):
         repository = create_repository(
             full_repository_name=request.data['full_name'],

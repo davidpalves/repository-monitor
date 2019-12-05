@@ -3,7 +3,7 @@ import React from 'react';
 import repository from '../../../../services/repositories'
 import Alert from '../Alert/Alert'
 
-import './style.scss';
+import '../../../../../sass/components/sidebar.scss';
 
 class SideBar extends React.Component {
   constructor(props) {
