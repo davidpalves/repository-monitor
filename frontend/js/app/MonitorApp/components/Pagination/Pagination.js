@@ -5,7 +5,7 @@ import '../../../../../sass/components/pagination.scss';
 const Pagination = (props) => {
   const { getPage, nextPage, prevPage } = props;
 
-  if(!nextPage && !prevPage){
+  if (!nextPage && !prevPage) {
     return null;
   }
 
