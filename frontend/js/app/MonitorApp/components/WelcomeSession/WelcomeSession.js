@@ -105,6 +105,12 @@ class WelcomeSession extends React.Component {
               />
               <button onClick={this.onClick}>Go!</button>
             </div>
+            <p>
+              <small>
+                When a repository is added, at first,
+                only the commits from the last 30 days will be captured
+              </small>
+            </p>
         </form>
       </div>
     );
