@@ -3,7 +3,6 @@ from datetime import datetime, timedelta
 from github import Github, UnknownObjectException, GithubException
 from rest_framework.exceptions import ValidationError, NotFound
 from django.conf import settings
-from celery import task
 
 from .models import Repository, Author, Commit
 
@@ -65,9 +64,8 @@ def create_repository(user, full_repository_name):
         raise NotFound('Repository not found on your Github account.')
 
 
-@task
-def create_webhook(access_token, full_repository_name):
-    github = Github(access_token)
+def create_webhook(user, full_repository_name):
+    github = Github(user.github.access_token)
 
     try:
         hook_configs = {}
