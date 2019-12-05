@@ -22,7 +22,6 @@ def create_repository(user, full_repository_name):
 
         retrieved_repository = github.get_user(owner).get_repo(name)
 
-
         create_webhook(name=name, user=user)
 
         repository = Repository.objects.create(
