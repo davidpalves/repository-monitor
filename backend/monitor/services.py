@@ -12,14 +12,15 @@ def create_repository(user, full_repository_name):
 
     try:
         name = full_repository_name.split('/')[1]
+        owner = full_repository_name.split('/')[0]
 
         if Repository.objects.filter(name=name,
+                                     owner_login=owner,
                                      users__username=user.username):
             raise ValidationError(
-                f'The repository {name} from your github account ({user.username})\
-                was already added.')
+                f'The repository {name} was already added.')
 
-        retrieved_repository = github.get_user().get_repo(name)
+        retrieved_repository = github.get_user(owner).get_repo(name)
 
         repository = Repository.objects.create(
             full_name=retrieved_repository.full_name,
@@ -55,6 +56,11 @@ def create_repository(user, full_repository_name):
 
         repository.users.add(user)
 
+        create_webhook(
+             name=name,
+             user=user,
+        )
+
         return repository
 
     except IndexError:
@@ -64,7 +70,7 @@ def create_repository(user, full_repository_name):
         raise NotFound('Repository not found on your Github account.')
 
 
-def create_webhook(user, full_repository_name):
+def create_webhook(user, name):
     github = Github(user.github.access_token)
 
     try:
@@ -72,8 +78,6 @@ def create_webhook(user, full_repository_name):
         hook_configs['url'] = settings.APP_BASE_URL + '/hooks/'
         hook_configs['content_type'] = 'json'
         hook_configs['secret'] = settings.GITHUB_WEBHOOK_KEY
-
-        name = full_repository_name.split('/')[1]
 
         retrieved_repository = github.get_user().get_repo(name)
 
@@ -88,4 +92,5 @@ def create_webhook(user, full_repository_name):
         for error in ex.data['errors']:
             if error['message'] == 'Hook already exists on this repository':
                 return
-        raise NotFound("Could not create webhook.")
+        raise NotFound("Could not create webhook.\
+                        Please, check your repository permissions")
