@@ -22,6 +22,9 @@ def create_repository(user, full_repository_name):
 
         retrieved_repository = github.get_user(owner).get_repo(name)
 
+
+        create_webhook(name=name, user=user)
+
         repository = Repository.objects.create(
             full_name=retrieved_repository.full_name,
             name=retrieved_repository.name,
@@ -56,18 +59,13 @@ def create_repository(user, full_repository_name):
 
         repository.users.add(user)
 
-        create_webhook(
-             name=name,
-             user=user,
-        )
-
         return repository
 
     except IndexError:
         raise ValidationError('Repository name not in the correct format.')
 
     except UnknownObjectException:
-        raise NotFound('Repository not found on your Github account.')
+        raise NotFound('Repository not found.')
 
 
 def create_webhook(user, name):
@@ -89,8 +87,10 @@ def create_webhook(user, name):
         )
 
     except GithubException as ex:
-        for error in ex.data['errors']:
-            if error['message'] == 'Hook already exists on this repository':
-                return
+        print(ex.data)
+        if 'errors' in ex.data:
+            for error in ex.data['errors']:
+                if error['message'] == 'Hook already exists on this repository':
+                    return
         raise NotFound("Could not create webhook.\
                         Please, check your repository permissions")
