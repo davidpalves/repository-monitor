@@ -29,9 +29,8 @@ class CommitList extends React.Component {
         <div className="title-header">
           <h1 className="commits-section-title">Latest commits {fullName && `on ${fullName}`}</h1>
           {
-           (commit && (commit.next || commit.previous))
-           &&
-           (<Pagination getPage={this.getPage} nextPage={commit.next} prevPage={commit.previous}/>)
+           commit && 
+           <Pagination getPage={this.getPage} nextPage={commit.next} prevPage={commit.previous}/>
           }
         </div>
         {commit &&
@@ -45,6 +44,12 @@ class CommitList extends React.Component {
               />
             );
           })}
+          <div className="pagination-footer">
+            {
+            commit && 
+            <Pagination getPage={this.getPage} nextPage={commit.next} prevPage={commit.previous}/>
+            }
+          </div>
       </div>
     );
   }

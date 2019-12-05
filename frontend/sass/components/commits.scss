@@ -10,6 +10,14 @@
     overflow-y: auto;
 }
 
+.pagination-footer {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+}
+
 .title-header {
   display: flex;
   align-items: center;

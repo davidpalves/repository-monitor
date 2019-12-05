@@ -5,6 +5,10 @@ import '../../../../../sass/components/pagination.scss';
 const Pagination = (props) => {
   const { getPage, nextPage, prevPage } = props;
 
+  if(!nextPage && !prevPage){
+    return null;
+  }
+
   return (
     <div className="pagination">
       {prevPage ? (
