@@ -40,9 +40,9 @@ class RepositoryViewSet(viewsets.ModelViewSet): # noqa
             user=request.user
         )
 
-        create_webhook(
+        create_webhook.delay(
             full_repository_name=request.data['full_name'],
-            user=request.user,
+            user_id=request.user.github.access_token,
         )
 
         serializer = RepositorySerializer(repository)
