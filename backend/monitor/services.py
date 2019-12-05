@@ -1,6 +1,5 @@
 from datetime import datetime, timedelta
 
-from django.db import IntegrityError
 from github import Github, UnknownObjectException, GithubException
 from rest_framework.exceptions import ValidationError, NotFound
 from django.conf import settings
@@ -13,18 +12,12 @@ def create_repository(user, full_repository_name):
 
     try:
         name = full_repository_name.split('/')[1]
-        owner = full_repository_name.split('/')[0]
-        github.get_user(owner)
-    except IndexError:
-        raise ValidationError('Repository name not in the correct format.')
-    except UnknownObjectException:
-        raise NotFound('Repository owner not found.')
 
-
-    try:
         if Repository.objects.filter(name=name,
                                      users__username=user.username):
-            raise ValidationError(f'The repository {name} from your github account({user.username}) was already added.')
+            raise ValidationError(
+                f'The repository {name} from your github account ({user.username})\
+                was already added.')
 
         retrieved_repository = github.get_user().get_repo(name)
 
@@ -64,6 +57,9 @@ def create_repository(user, full_repository_name):
 
         return repository
 
+    except IndexError:
+        raise ValidationError('Repository name not in the correct format.')
+
     except UnknownObjectException:
         raise NotFound('Repository not found on your Github account.')
 
@@ -81,11 +77,6 @@ def create_webhook(user, full_repository_name):
 
         retrieved_repository = github.get_user().get_repo(name)
 
-        if retrieved_repository.owner.login != user.username:
-            raise ValidationError(
-                "You don't have permissions to watch this repository"
-            )
-
         retrieved_repository.create_hook(
             name="web",
             config=hook_configs,
@@ -94,7 +85,6 @@ def create_webhook(user, full_repository_name):
         )
 
     except GithubException as ex:
-        print(ex.data)
         for error in ex.data['errors']:
             if error['message'] == 'Hook already exists on this repository':
                 return
