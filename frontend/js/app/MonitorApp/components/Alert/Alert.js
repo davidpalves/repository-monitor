@@ -18,7 +18,7 @@ const Alert = (props) => {
         <div className="alert-title">
           <h3 className="title">I am so sorry!</h3>
         </div>
-        <p>{message}</p>
+        <p className="alert-message">{message}</p>
       </div>
     </div>
   );
