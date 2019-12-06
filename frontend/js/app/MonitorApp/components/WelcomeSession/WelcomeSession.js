@@ -95,7 +95,7 @@ class WelcomeSession extends React.Component {
 
         <h1>Watch your repositories commits easily</h1>
         <form>
-          <label>Search one of yours repositories</label>
+          <label>Search one of your repositories</label>
           <div className="search-form">
             <input
               type='text'
