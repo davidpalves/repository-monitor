@@ -8,7 +8,7 @@
   flex-flow: column;
   text-align: center;
 
-  .-not-found-title {
+  .not-found-title {
     text-align: center;
     font-size: 3.5rem;
     margin-bottom: 2rem;
@@ -16,12 +16,13 @@
 
   .not-found-subtitle {
     font-size: 2.5rem;
-    margin-bottom: 2rem;
+    margin-bottom: 3.5rem;
     text-align: center;
   }
 
   .redirect-home {
     background-color: transparent;
+    font-size: 1.8rem;
     padding: 10px 15px 10px 15px;
     align-self: center;
     border: 1px solid $lightDark;
