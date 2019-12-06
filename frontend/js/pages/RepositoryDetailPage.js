@@ -1,12 +1,10 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
-import CommitList from '../app/MonitorApp/components/CommitCard/CommitList';
-import TopNavbar from '../app/MonitorApp/components/TopNavbar/TopNavbar';
-import SideBar from '../app/MonitorApp/components/SideBar/SideBar';
-import Loading from '../app/MonitorApp/components/Loading/Loading';
-import repositories from '../services/repositories';
-import commits from '../services/commits';
+import { CommitList, TopNavbar, SideBar, Loading } from 'app/MonitorApp/components';
+
+import repositories from 'services/repositories';
+import commits from 'services/commits';
 
 import '../../sass/pages/home.scss';
 

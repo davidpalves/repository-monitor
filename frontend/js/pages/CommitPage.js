@@ -1,10 +1,8 @@
 import React from 'react';
 
-import CommitList from '../app/MonitorApp/components/CommitCard/CommitList';
-import TopNavbar from '../app/MonitorApp/components/TopNavbar/TopNavbar';
-import Loading from '../app/MonitorApp/components/Loading/Loading';
-import SideBar from '../app/MonitorApp/components/SideBar/SideBar';
-import commits from '../services/commits';
+import { CommitList, Loading, SideBar,TopNavbar } from '../app/MonitorApp/components';
+
+import commits from 'services/commits';
 
 import '../../sass/pages/home.scss';
 

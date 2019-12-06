@@ -1,6 +1,6 @@
 import React from 'react';
 
-import WelcomeSession from '../app/MonitorApp/components/WelcomeSession/WelcomeSession';
+import { WelcomeSession } from 'app/MonitorApp/components';
 
 import '../../sass/pages/home.scss';
 

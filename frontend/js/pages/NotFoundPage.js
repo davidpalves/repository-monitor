@@ -9,7 +9,7 @@ const NotFoundPage = () => {
       <h1 className="not-found-title">If you are going, go in peace.</h1>
       <h4 className="not-found-subtitle">But, if you are just lost</h4>
       <Link className="redirect-home" to="/">
-        I suggest you to go Home{' '}
+        I suggest you to go Home
       </Link>
     </div>
   );

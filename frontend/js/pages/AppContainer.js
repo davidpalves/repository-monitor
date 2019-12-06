@@ -1,7 +1,7 @@
 import React from 'react';
 import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 
-import TopNavbar from '../app/MonitorApp/components/TopNavbar/TopNavbar';
+import { TopNavbar } from 'app/MonitorApp/components';
 
 import Home from './Home';
 import CommitPage from './CommitPage';
