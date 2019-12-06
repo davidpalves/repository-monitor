@@ -1,4 +1,5 @@
 {% load render_bundle from webpack_loader %}
+{% load static %}
 
 <!doctype html>
 <html class="no-js" lang="en">
@@ -8,6 +9,9 @@
     <title>{% block title %}{% endblock %}</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" href={% static "images/pi-fork.ico" %} type="image/x-icon">
+	  <link rel="icon" href={% static "images/pi-fork.ico" %} type="image/x-icon">
 
     <!-- Webpack rendered CSS -->
     {% render_bundle 'main' 'css' %}
