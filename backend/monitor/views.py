@@ -32,7 +32,8 @@ class RepositoryViewSet(viewsets.ModelViewSet): # noqa
     serializer_class = RepositorySerializer
 
     def get_queryset(self):
-        return self.request.user.watched_repositories.all()
+        user = self.request.user
+        return user.watched_repositories.all().prefetch_related('commits', 'commits__author')
 
     def create(self, request, *args, **kwargs):
         repository = create_repository(
