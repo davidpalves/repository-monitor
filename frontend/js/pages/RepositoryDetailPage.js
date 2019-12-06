@@ -27,11 +27,14 @@ class RepositoryDetailPage extends React.Component {
 
   async getRepositoryData() {
     const id = this.props.match.params.repositoryId
+    const { history } = this.props;
     this.setState({ loading: true });
 
     const { data } = await repositories.getRepository(id).then(response => {
       this.setState({ loading: false });
       return response;
+    }).catch(() => {
+      history.push('/404')
     });
 
     this.setState({ data });
